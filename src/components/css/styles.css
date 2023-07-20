@@ -1,0 +1,11 @@
+.my-reps::-webkit-inner-spin-button,
+.my-reps::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.my-kg::-webkit-inner-spin-button,
+.my-kg::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}/*# sourceMappingURL=styles.css.map */

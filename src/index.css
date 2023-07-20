@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 'Roboto', sans-serif;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./Fonts/Roboto-Regular.ttf') format('truetype');
+  /* Asegúrate de ajustar la ruta y el nombre del archivo según donde hayas copiado los archivos en tu proyecto. */
+}
+
+body {
+  /*background-color: #202d3a;*/
+  /*background-color: #212125;*/
+  background-color: black;
+  font-size: 'Roboto', sans-serif;
+}
