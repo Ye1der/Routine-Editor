@@ -46,7 +46,7 @@ export function LogOut(){
 
     return (
         <main className="w-full h-screen flex flex-col items-center justify-center " >
-            <div className="bg-grayGym bg-opacity-50 w-96 h-4/5 rounded-3xl" >
+            <div className="bg-grayGym bg-opacity-50 w-96 rounded-3xl" >
                 <div className='flex justify-end items-center'>
                     <h1 className='hover:text-opacity-90 text-center text-white text-lg text-opacity-75 font-bold my-3 mx-8 cursor-pointer' onClick={()=>{navigate("/login")}} >Iniciar sesion</h1>
                 </div>
@@ -77,7 +77,9 @@ export function LogOut(){
                     type="password" placeholder="Contraseña" id='contraseña2'/>
                 </div>
 
-                <button className='mt-8 bg-white bg-opacity-70 w-28 h-8 rounded-lg mx-32 transition-all duration-200 hover:bg-opacity-90 ' onClick={agregarUsuario}> Crear cuenta </button>
+                <div className='flex justify-center items-center'>
+                    <button className='mt-8 mb-6 bg-white bg-opacity-70 w-28 h-8 rounded-lg transition-all duration-200 hover:bg-opacity-90 ' onClick={agregarUsuario}> Crear cuenta </button>
+                </div>
             </div>
 
             {validador === 1 ? <h1  className='text-red-500 text-opacity-90 text-center font-bold mt-3'  > Las contraseñas no coinciden </h1> : ""}

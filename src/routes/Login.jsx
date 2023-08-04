@@ -42,16 +42,20 @@ export function Login(){
     // Revisa si el inicio de sesion es valido y registra el usuario
     async function verificador(user){
         if(user){
-            const userExist = await exisDbtUser(user.uid)
+            const userExist = await existDbUser(user.email)
 
         if(userExist){
             navigate("/main")
+
         } else {
-            await addUser({
-                uid: user.uid,
+            const object = {
+                email: user.email,
                 name: user.displayName,
-                cardsUser: []
-            })
+                rutines: [],
+                rutinesTrash: []
+            }
+
+            await addUser(object)
 
             navigate("/main")
         }
@@ -63,7 +67,7 @@ export function Login(){
         const existAcount = await userExist(email)
         
         if(existAcount){
-            const res = iniciarSesion(email, contraseña)
+            const res = await iniciarSesion(email, contraseña)
 
             if(res){
                 navigate("/main")
@@ -72,14 +76,13 @@ export function Login(){
             }
 
         } else {
-
             setInvalidUser(1)
         }
     }
     
     return (
         <main className="w-full h-screen flex flex-col items-center justify-center" >
-            <div className="bg-grayGym bg-opacity-50 w-96 h-4/5 rounded-3xl" >
+            <div className="bg-grayGym bg-opacity-50 w-96 rounded-3xl" >
                 <div className='flex justify-end items-center'>
                     <h1 className=' hover:text-opacity-90 text-center text-white text-lg text-opacity-75 font-bold my-3 mx-8 cursor-pointer' onClick={()=>{navigate("/logout")}} >Crear cuenta</h1>
                 </div>
@@ -102,16 +105,17 @@ export function Login(){
                     type="password" placeholder="Contraseña" id='contraseña'/>
                 </div>
 
-                <button className='mt-6 bg-white bg-opacity-70 w-28 h-8 rounded-lg mx-32 transition-all duration-200 hover:bg-opacity-90 ' onClick={verificadorLocal}> Iniciar sesion </button>
+                <div className='flex items-center justify-center'> <button className='mt-8 bg-white bg-opacity-70 w-28 h-8 rounded-lg transition-all duration-200 hover:bg-opacity-90 ' onClick={verificadorLocal}> Iniciar sesion </button> </div>
 
-                <div className='cursor-pointer flex items-center justify-center bg-red-500 bg-opacity-75 mx-14 mt-6 p-2 rounded-xl hover:bg-opacity-90 transition-all duration-200z' onClick={loginGoogle}> 
-                <BsGoogle className='mr-2'/> 
-                <h1 className='font-bold'>Iniciar sesion con Gooogle</h1>
-                </div>
+                <div className='flex gap-3 w-full items-center justify-center mt-8 mb-6'>
+                    <div className='cursor-pointer flex items-center justify-center bg-red-500 bg-opacity-75 p-2 rounded-full hover:bg-opacity-90 transition-all duration-200 w-10 h-10' 
+                    onClick={loginGoogle}> 
+                    <BsGoogle className=''/> 
+                    </div>
 
-                <div className='cursor-pointer flex items-center justify-center bg-blue-500 bg-opacity-75 mx-14 mt-3 p-2 rounded-xl hover:bg-opacity-90 transition-all duration-200z'> 
-                <FaFacebook className='mr-2'/> 
-                <h1 className='font-bold'>Iniciar sesion con Facebook</h1>
+                    <div className='w-10 h-10 cursor-pointer flex items-center justify-center bg-blue-500 bg-opacity-75 p-2 rounded-full hover:bg-opacity-100 transition-all duration-200'> 
+                    <FaFacebook className='text-xl'/> 
+                    </div>
                 </div>
             </div>
 

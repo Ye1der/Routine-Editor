@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "firebase": "^9.22.2",
+    "framer-motion": "10.15.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.2",
     "react-icons": "^4.9.0",
     "react-ionicons": "^4.2.1",
     "react-router": "^6.13.0",

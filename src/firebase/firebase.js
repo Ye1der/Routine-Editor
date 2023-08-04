@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import {getAuth, signOut, createUserWithEmailAndPassword, fetchSignInMethodsForEmail, signInWithEmailAndPassword} from "firebase/auth"
+import {getAuth, signOut, createUserWithEmailAndPassword, fetchSignInMethodsForEmail, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
 import {getStorage, ref, uploadBytes, getDownloadURL, getBytes} from "firebase/storage"
 import {getFirestore, collection, addDoc, getDocs, doc, getDoc, query, setDoc, where, deleteDoc } from "firebase/firestore"
 
@@ -29,17 +29,24 @@ export async function existDbUser(texto){
 
 export async function addUser(user){
   const collectionRef = collection(db, "users");
-  const docRef = doc(collectionRef, user.uid)
+  const docRef = doc(collectionRef, user.email)
   await setDoc(docRef, user)
 }
 
 export async function updateUser(user){
-  const docRef = doc(db, "users", user.uid)
-  await setDoc(docRef, user)
+  try {
+    const docRef = doc(db, "users", user.email)
+    await setDoc(docRef, user)
+    return true
+  } catch (error) {
+    console.log("error al actualizar el usuario", error);
+    return false
+  }
 }
 
-export async function returnData(uid){
-  const docRef = doc(db, "users", uid)
+export async function returnData(email){
+
+  const docRef = doc(db, "users", email)
   const docSnap = await getDoc(docRef)
 
   if(docSnap.exists()){
@@ -77,8 +84,13 @@ export async function cerrarSesion(){
 
 export async function iniciarSesion(email, contraseña){
   try {
-    await signInWithEmailAndPassword(auth, email, contraseña) 
-    return true
+    const userCredential = await signInWithEmailAndPassword(auth, email, contraseña) 
+    const user = userCredential.user
+    if(user){
+      return true
+    } else {
+      return false
+    }
 
   } catch (error) {
     console.log("error al iniciar sesion: ", error)

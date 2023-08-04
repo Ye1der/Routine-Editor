@@ -1,18 +1,18 @@
-import ContextProvider from "./Context/Context"
+import { ContextProvider } from "./Context/Context"
 import { CerrarSesion } from "./components/cerrarSesion"
 import { Navegacion } from "./components/Navegacion"
-import { Rutinas } from "./components/Rutinas"
+import { ContainerRutinas } from "./components/ContainerRutinas"
 
 function App() {
   
   return (
-  <ContextProvider>
-    <main className="flex" >
-      <CerrarSesion/>
-      <Navegacion/>
-      <Rutinas/>
-    </main>
-  </ContextProvider>
+    <ContextProvider>
+      <main className="flex" >
+        <CerrarSesion/>
+        <Navegacion/>
+        <ContainerRutinas/>
+      </main>
+    </ContextProvider>
   ) 
 }
 
