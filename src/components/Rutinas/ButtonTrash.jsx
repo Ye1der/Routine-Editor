@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import {FiTrash2} from 'react-icons/fi'
 import {TiDeleteOutline} from 'react-icons/ti'
-import { contextGlobal } from '../Context/Context'
+import { contextGlobal } from '../../Context/Context'
 
 export function ButtonTrash(){
 

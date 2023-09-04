@@ -1,20 +1,25 @@
 import { useContext } from "react"
-import { contextGlobal } from "../Context/Context"
-import {AnimatePresence, motion} from 'framer-motion'
+import { contextGlobal } from "../../Context/Context"
+import {motion} from 'framer-motion'
 import { TiDelete } from "react-icons/ti"
+import {BiPencil} from 'react-icons/bi'
 
 export function VerRutina(){
 
-  const {usuario, verRutina, setVerRutina} = useContext(contextGlobal)
+  const {usuario, verRutina, setVerRutina, setEditar} = useContext(contextGlobal)
 
   return(
     <div className='absolute z-20 flex items-center justify-center bg-black bg-opacity-80 w-full h-full'>
-      <AnimatePresence>
       <motion.div className='bg-grayGym w-[350px] h-[440px] rounded-3xl relative' 
       initial={{scale: 0, opacity: 0, y:-500}} animate={{scale: 1, opacity: 1, y:0}} exit={{y: -500}}>
 
-        <TiDelete className="absolute top-3 right-3 text-red-500 text-opacity-90 text-[33px] cursor-pointer hover:text-red-600 hover:rotate-90 hover:text-opacity-100 transition-all duration-300"
+        <TiDelete className="absolute top-3 right-3 text-red-500 text-opacity-90 text-[33px] cursor-pointer hover:text-red-700 hover:rotate-90 hover:text-opacity-100 transition-all duration-300"
         onClick={()=>{setVerRutina(null)}}/>
+
+        <div className="absolute right-14 top-[17px] transition-all duration-300 text-[14px] p-1 cursor-pointer rounded-full bg-yellow-600 hover:bg-yellow-500 hover:-rotate-45 "
+        onClick={()=>{setVerRutina(null); setEditar(verRutina)}}>
+          <BiPencil/>
+        </div>
 
         <h1 className="text-4xl font-bold text-yellow-600 ml-5 mt-10"> {usuario.rutines[verRutina].nombre} </h1>
         <p className="text-2xl w-[80%] text-opacity-80 font-bold text-white ml-5 mt-3"> {usuario.rutines[verRutina].descripcion} </p>
@@ -31,7 +36,6 @@ export function VerRutina(){
         })}
         </div>
       </motion.div>
-      </AnimatePresence>
     </div>
   )
 }

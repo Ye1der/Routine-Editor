@@ -1,11 +1,12 @@
 
-import { createContext, useState } from "react";
+import { createContext, useState, useRef } from "react";
 import { updateUser } from "../firebase/firebase";
 
 export const contextGlobal = createContext()
 
 export function ContextProvider({children}){
 
+    // Rutines
     const [clickCrear, setClickCrear] = useState(false);
     const [clickCancelar, setClickCancelar] = useState(false)
     const [render, setRender] = useState(true);
@@ -16,6 +17,17 @@ export function ContextProvider({children}){
     const [focus, setFocus] = useState(null)
     const [editar, setEditar] = useState(null)
     const [verRutina, setVerRutina] = useState(null)
+    const [progreso, setProgreso] = useState(null)
+    const [eliminar, setEliminar] = useState(false)
+    const [papelera, setPapelera] = useState(false)
+    const [reestablecer, setReestablecer] = useState(false)
+    const [loading, setLoading] = useState(null)
+    const [voidTrash, setVoidTrash] = useState(false)
+    const [page, setPage] = useState('')
+    const focusRefEliminar = useRef(null)
+
+    // Food
+    const [searchFood, setSearchFood] = useState('');
 
     function ClickFunc(){
 
@@ -41,11 +53,19 @@ export function ContextProvider({children}){
     }
 
     async function eliminarRutina(index, arreglo){
+
         const newArray = usuario[arreglo]
         await newArray.splice(index, 1)
         await updateUser({...usuario, [arreglo]: newArray})
-        activeEfect ? setActiveEfect(false) : setActiveEfect(true)
+
+        setActiveEfect(!activeEfect)
+        setEliminar(false)
     }
+
+    //const url = window.location.href
+
+    // url.includes('rutines') && setPage('rutines')
+    // url.includes('food') && setPage('food')
 
     return (
         <contextGlobal.Provider 
@@ -60,7 +80,16 @@ export function ContextProvider({children}){
         focus, setFocus,
         editar, setEditar, 
         verRutina, setVerRutina,
-        eliminarRutina}}>
+        eliminarRutina,
+        eliminar, setEliminar, 
+        papelera, setPapelera,
+        reestablecer, setReestablecer,
+        loading, setLoading, 
+        voidTrash, setVoidTrash,
+        focusRefEliminar,
+        page, setPage,
+        searchFood, setSearchFood,
+        progreso, setProgreso}}>
 
             {children}
             

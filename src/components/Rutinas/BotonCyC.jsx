@@ -2,7 +2,7 @@
 import { useContext, useState } from 'react'
 import {BiMessageSquareAdd} from 'react-icons/bi'
 import {TiDeleteOutline} from 'react-icons/ti'
-import { contextGlobal } from '../Context/Context';
+import { contextGlobal } from '../../Context/Context';
 
 export function BotonCyC(){
 

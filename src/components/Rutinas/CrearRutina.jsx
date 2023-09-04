@@ -3,16 +3,17 @@ import {BiMessageSquareAdd} from 'react-icons/bi'
 import {IoMdAddCircle} from 'react-icons/io'
 import {IoMdRemoveCircle} from 'react-icons/io'
 import {useForm} from 'react-hook-form'
-import './css/styles.css'
-import { contextGlobal } from '../Context/Context'
-import { updateUser } from '../firebase/firebase'
+import { contextGlobal } from '../../Context/Context'
+import { updateUser } from '../../firebase/firebase'
 import {motion} from 'framer-motion'
+import { VscLoading } from 'react-icons/vsc'
+import './styles.css'
 
 export function CrearRutina(){
 
   const [ejercicios, setEejercicios] = useState([1,2,3,4]) //Ejercicios que contiene el formulario
   const formularioRef = useRef(null) //Referencia el div que contiene los ejercicios
-  const {usuario, ClickFunc} = useContext(contextGlobal)
+  const {usuario, ClickFunc, loading, setLoading} = useContext(contextGlobal)
   const {register, formState: {errors},handleSubmit} = useForm() //Hook useForm para retornar un objeto con los valores del formulario
 
   useEffect(()=>{
@@ -23,6 +24,8 @@ export function CrearRutina(){
 
   async function onSubmit(data){ // La funcion handleSubmit ya le proporciona el parametro data
     
+    setLoading(true)
+
     const arrayEjercicios = ejercicios.map((e) => { //Crea un arreglo de objetos con los atributos de los ejercicios
       return (
         { // Al poner los corchetes se hace referencia a poner una variable o codigo y los mismo reemplzan el punto
@@ -36,12 +39,13 @@ export function CrearRutina(){
     const objectRutine = {
         nombre: data.nombre,
         descripcion: data.descripcion,
-        ejercicios: arrayEjercicios
+        ejercicios: arrayEjercicios,
     }
 
-    const cambio = await updateUser({...usuario, rutines: [...usuario.rutines, objectRutine]})
+    const cambio = await updateUser({...usuario, rutines: [...usuario.rutines, {...objectRutine, progreso: [objectRutine]}]})
 
     cambio ? ClickFunc() : ''
+    setLoading(null)
   }
 
   return(
@@ -101,7 +105,20 @@ export function CrearRutina(){
           {ejercicios.length > 12 && ejercicios.length < 20 ? <h1 className='font-bold absolute left-10 bottom-16 text-yellow-300 select-none'> No se recomienda hacer mas de 12 ejercicios </h1> : ''}
           {ejercicios.length > 19 ? <h1 className='font-bold absolute left-10 bottom-16 text-red-500 select-none'> Estas loco... </h1> : ''}  
 
-          <button type='submit' className='select-none absolute right-3 bottom-3'> <h1 className={` hover:text-yellow-500 flex items-center justify-center font-bold text-white px-3 py-1 text-xl rounded-3xl text-opacity-80 transition-all duration-200`}> Crear <BiMessageSquareAdd className='ml-1'/> </h1></button>
+          <button type='submit' className='select-none absolute right-3 bottom-3'> 
+
+            {!loading && 
+              <h1 className={` hover:text-yellow-500 flex items-center justify-center font-bold text-white px-3 py-1 text-xl rounded-3xl text-opacity-80 transition-all duration-200`}> Crear <BiMessageSquareAdd className='ml-1'/></h1>
+            } 
+
+            {loading && 
+              <motion.div initial={{scale: 0}} animate={{scale: 1}} className='mr-10 mb-2'>
+                <motion.div initial={{rotate: 0}} animate={{rotate: 3000}} transition={{duration: 4}} >
+                  <VscLoading style={{strokeWidth: '1px'}} className="text-xl text-white"/>
+                </motion.div>
+              </motion.div>
+            }
+          </button>
       </form>
     </motion.div>
   )

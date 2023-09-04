@@ -8,7 +8,7 @@ export default {
     extend: {
       colors: {
         blueGym: '#2790b0',
-        grayGym: '#212125',
+        grayGym: '#202020',
         orangeGym: '#ff4d4d',
       }
     },

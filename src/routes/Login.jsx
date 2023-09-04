@@ -84,7 +84,7 @@ export function Login(){
         <main className="w-full h-screen flex flex-col items-center justify-center" >
             <div className="bg-grayGym bg-opacity-50 w-96 rounded-3xl" >
                 <div className='flex justify-end items-center'>
-                    <h1 className=' hover:text-opacity-90 text-center text-white text-lg text-opacity-75 font-bold my-3 mx-8 cursor-pointer' onClick={()=>{navigate("/logout")}} >Crear cuenta</h1>
+                    <h1 className=' hover:text-opacity-90 text-center text-white text-lg text-opacity-75 font-bold my-3 mx-8 cursor-pointer' onClick={()=>{navigate("/logout")}}>Crear cuenta</h1>
                 </div>
 
                 <h1 className="text-white text-4xl mt-6 ml-8 font-bold" > Iniciar sesion </h1>
