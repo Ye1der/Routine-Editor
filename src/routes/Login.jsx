@@ -45,7 +45,7 @@ export function Login(){
             const userExist = await existDbUser(user.email)
 
         if(userExist){
-            navigate("/main")
+            navigate("/main/rutines")
 
         } else {
             const object = {
@@ -57,7 +57,7 @@ export function Login(){
 
             await addUser(object)
 
-            navigate("/main")
+            navigate("/main/rutines")
         }
         }
     }

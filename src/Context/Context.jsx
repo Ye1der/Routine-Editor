@@ -25,6 +25,7 @@ export function ContextProvider({children}){
     const [voidTrash, setVoidTrash] = useState(false)
     const [page, setPage] = useState('')
     const focusRefEliminar = useRef(null)
+    const [fecha, setFecha] = useState(null);
 
     // Food
     const [searchFood, setSearchFood] = useState('');

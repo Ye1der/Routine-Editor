@@ -42,10 +42,14 @@ export function EditarRutina(){
       )
     })
 
+    const date = new Date();
+    const fecha = `${date.getDate()} / ${date.getMonth() + 1} / ${date.getFullYear()}`
+
     const objectRutine = {
         nombre: data.nombre,
         descripcion: data.descripcion,
-        ejercicios: arrayEjercicios
+        ejercicios: arrayEjercicios,
+        fecha: fecha,
     }
 
     const progreso = usuario.rutines[editar].progreso

@@ -47,7 +47,7 @@ export function Rutinas(){
               </button>
 
               <div onClick={()=>{setVerRutina(index)}} className="transition-all duration-300 h-56 cursor-pointer absolute top-0 w-full rounded-t-3xl">
-                <h1 className="mt-9 ml-3 text-3xl text-white text-opacity-80 font-bold "> {e.nombre} </h1>
+                <h1 className="mt-9 ml-3 text-3xl text-white text-opacity-80 font-bold "> {e.nombre}  </h1>
                 <p className="text-white text-lg font-bold text-opacity-50 mr-4 mt-3 ml-3"> {e.descripcion} </p>
               </div>
 
