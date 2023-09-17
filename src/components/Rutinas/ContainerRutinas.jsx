@@ -18,11 +18,10 @@ import { Progreso } from "./Progreso"
 
 export function ContainerRutinas(){
 
-  const {progreso, render, clickCancelar, clickCrear, usuario, setUsuario, activeEfect, renderTrash, editar, verRutina, setEditar, setVerRutina, setFocus} = useContext(contextGlobal)
+  const {setLoading, progreso, render, clickCancelar, clickCrear, usuario, setUsuario, activeEfect, renderTrash, editar, verRutina, setEditar, setVerRutina, setFocus} = useContext(contextGlobal)
 
   useEffect(()=>{
     onAuthStateChanged(auth, userInfo)
-
     setFocus(null)
   }, [render, activeEfect])
 

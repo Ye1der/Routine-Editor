@@ -1,5 +1,5 @@
 import {motion} from 'framer-motion'
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 import { contextGlobal } from '../../Context/Context'
 import { updateUser } from '../../firebase/firebase'
 import { VscLoading } from 'react-icons/vsc'
@@ -8,9 +8,9 @@ import { VscLoading } from 'react-icons/vsc'
 export function RutinesTrash(){
 
   const {usuario, focus, setFocus, eliminarRutina, activeEfect, setActiveEfect, eliminar, setEliminar, loading, setLoading} = useContext(contextGlobal)
-
+  const unfocused = useRef(null)
+  
   async function reestablecer(index){
-
     setLoading(true)
 
     const rutinaReestablecida = usuario.rutinesTrash[index]
@@ -69,31 +69,32 @@ export function RutinesTrash(){
               {focus === index && eliminar === true && 
                 <motion.div className="text-lg font-bold"
                 initial={{opacity: 0, scale: 0}} animate={{opacity: 1, scale: 1}}>
-    
-                  {loading != index && 
                     <div>
                       <h1> Seguro? </h1>
 
                       <h1 className="flex gap-10 mt-4">
-                          <span onClick={()=>{setLoading(index); eliminarRutina(index, 'rutinesTrash')}} className="hover:text-white transition-all duration-300 cursor-pointer">Si</span>  
+                          <span onClick={()=>{
+                            eliminarRutina(index, 'rutinesTrash')
+                            unfocused.current.focus()
+                          }} className="hover:text-white transition-all duration-300 cursor-pointer">
+                            Si
+                          </span>
+
+
                           <span onClick={()=>{setEliminar(false)}} className="hover:text-white transition-all duration-300 cursor-pointer">No</span> 
                       </h1>
                     </div>
-                  }
-
-                  {loading === index && 
-                    <motion.div initial={{rotate: 0}} animate={{rotate: 3000, scale: 0.7}} transition={{duration: 3}} >
-                      <VscLoading className="font-bold text-4xl"/>
-                    </motion.div>
-                  }
                 </motion.div>
               }
             </button>
           </motion.div>
-        )
-      })}
 
+          )
+        })}
       </div>
+      <button ref={unfocused} className='scale-0 absolute top-0 right-0'></button> // Desenfoca el boton opciones
+
+
     </section>
   )
 }

@@ -40,10 +40,10 @@ export function CrearRutina(){
     const fecha = `${date.getDate()} / ${date.getMonth() + 1} / ${date.getFullYear()}`
 
     const objectRutine = {
-        nombre: data.nombre,
-        descripcion: data.descripcion,
-        ejercicios: arrayEjercicios,
-        date: fecha,
+      nombre: data.nombre,
+      descripcion: data.descripcion,
+      ejercicios: arrayEjercicios,
+      fecha: fecha
     }
 
     const cambio = await updateUser({...usuario, rutines: [...usuario.rutines, {...objectRutine, progreso: [objectRutine]}]})

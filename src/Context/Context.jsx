@@ -58,9 +58,11 @@ export function ContextProvider({children}){
         const newArray = usuario[arreglo]
         await newArray.splice(index, 1)
         await updateUser({...usuario, [arreglo]: newArray})
+        await setFocus(null)
 
         setActiveEfect(!activeEfect)
         setEliminar(false)
+        setLoading(null)
     }
 
     //const url = window.location.href

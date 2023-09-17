@@ -13,14 +13,11 @@ export function Rutinas(){
   async function papeleraFunc(index){
     setLoading(index)
 
-    const rutines = usuario.rutines
-    const rutineTrash = rutines[index]
-    const trash = usuario.rutinesTrash
-    const filter = rutines.filter(rutine => (rutine != rutines[index]))
-    
-    await updateUser({...usuario, rutines: filter, rutinesTrash: [...trash, rutineTrash] })
-    
-    activeEfect ? setActiveEfect(false) : setActiveEfect(true)
+    const eliminado = await usuario.rutines.splice(index, 1) //Elimina el elemento del arreglo rutines
+    await usuario.rutinesTrash.push(eliminado[0]) //Agrega el elemento en el arreglo rutinesTrash
+  
+    await updateUser(usuario) //Actualiza el usuario con los nuevos cambios
+
     setLoading(null)
   }
 
