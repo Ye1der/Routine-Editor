@@ -43,7 +43,7 @@ export function Rutinas(){
                 }
               </button>
 
-              <div onClick={()=>{setVerRutina(index)}} className="transition-all duration-300 h-56 cursor-pointer absolute top-0 w-full rounded-t-3xl">
+              <div onClick={()=>{setProgreso(index)}} className="transition-all duration-300 h-56 cursor-pointer absolute top-0 w-full rounded-t-3xl">
                 <h1 className="mt-9 ml-3 text-3xl text-white text-opacity-80 font-bold "> {e.nombre}  </h1>
                 <p className="text-white text-lg font-bold text-opacity-50 mr-4 mt-3 ml-3"> {e.descripcion} </p>
               </div>
@@ -53,12 +53,11 @@ export function Rutinas(){
 
                 {focus === index && eliminar === false && // Menu de opciones de cada rutina
                   <motion.div initial={{opacity: 0, scale: 0}} animate={{opacity: 1, scale: 1}} className={`grid grid-cols-1`}>
-
-                    <div onClick={()=>{setEditar(index)}} className="font-bold text-lg my-2 hover:text-white transition-all duration-300 cursor-pointer"> Actualizar </div>
-                    <div onClick={()=>{setProgreso(index)}}  className="font-bold text-lg my-2 hover:text-white transition-all duration-300 cursor-pointer"> progreso </div>
-                    <div onClick={()=>{setVerRutina(index)}} className="font-bold text-lg my-2 hover:text-white transition-all duration-300 cursor-pointer"> Ver Rutina </div>
                     
-
+                    <div onClick={()=>{setEditar(index)}} className="font-bold text-lg my-2 hover:text-white transition-all duration-300 cursor-pointer"> Actualizar </div>
+                    <div onClick={()=>{setProgreso(index)}}  className="font-bold text-lg my-2 hover:text-white transition-all duration-300 cursor-pointer"> Ver Rutina </div>
+                    {/*<div onClick={()=>{setVerRutina(index)}} className="font-bold text-lg my-2 hover:text-white transition-all duration-300 cursor-pointer"> Ver Rutina </div>*/}
+                    
                   </motion.div>
                 }
 

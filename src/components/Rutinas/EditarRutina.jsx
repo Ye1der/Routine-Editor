@@ -14,7 +14,7 @@ import { VscLoading } from 'react-icons/vsc'
 export function EditarRutina(){
   const refDiv = useRef(null)
 
-  const {usuario, setEditar, editar, setVerRutina} = useContext(contextGlobal)
+  const {usuario, setEditar, editar, setVerRutina, setProgreso} = useContext(contextGlobal)
 
   const arrayEjercicios = usuario.rutines[editar].ejercicios.map((e, index) => {return (index + 1)})
 
@@ -74,7 +74,8 @@ export function EditarRutina(){
         onSubmit={handleSubmit(onSubmit)}>
 
           <TiDelete onClick={()=>{setEditar(null)}} className="absolute top-3 right-3 text-red-500 text-opacity-90 text-[33px] cursor-pointer hover:text-red-600 hover:rotate-180 hover:text-opacity-100 transition-all duration-300" />
-          <div onClick={()=>{setEditar(null); setVerRutina(editar)}} className='absolute right-14 top-[17px] p-[3px] cursor-pointer bg-yellow-600 rounded-full hover:bg-yellow-500 transition-all duration-300 '> <FaRegEye/> </div>
+          
+          <div onClick={()=>{setEditar(null); setProgreso(editar)}} className='absolute right-14 top-[17px] p-[3px] cursor-pointer bg-yellow-600 rounded-full hover:bg-yellow-500 transition-all duration-300 '> <FaRegEye/> </div>
 
           <input className='text-white text-4xl font-bold text-opacity-85 mt-8 mb-3 w-4/5 outline-none bg-transparent ml-4 transition-all duration-200 placeholder:opacity-40 placeholder:font-bold caret-white cursor-text focus:placeholder:opacity-70' // Input para el nombre de la rutina
           type="text" placeholder='Nombre' autoComplete='off' defaultValue={objectRutine.nombre}

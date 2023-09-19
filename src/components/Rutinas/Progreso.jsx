@@ -4,10 +4,11 @@ import {motion} from 'framer-motion'
 import { TiDelete } from "react-icons/ti"
 import {BsFillArrowRightCircleFill} from 'react-icons/bs'
 import { useAnimation } from "framer-motion"
+import {BiPencil} from 'react-icons/bi'
 
 export function Progreso(){
 
-  const {usuario, progreso, setProgreso} = useContext(contextGlobal)
+  const {usuario, progreso, setProgreso, setEditar} = useContext(contextGlobal)
 
   const lengthProgreso = usuario.rutines[progreso].progreso.length
   const [indexProgreso, setIndexProgreso] = useState(lengthProgreso - 1)
@@ -60,15 +61,20 @@ export function Progreso(){
         <TiDelete onClick={()=>{setProgreso(null)}} className="absolute top-3 right-3 text-red-500 text-opacity-90 text-[33px] cursor-pointer hover:text-red-600 hover:rotate-180 hover:text-opacity-100 transition-all duration-300"/>
 
         <motion.h1 className="text-xs absolute text-white font-bold text-opacity-60 bottom-3 right-5"
-        animate={controls} transition={{duration: 0.2, ease: "backOut"}}>
+        animate={controls} transition={{duration: 0.15, ease: "backOut"}}>
           {rutineProgreso.fecha} 
         </motion.h1>
 
         <button onClick={()=>{changeProgress("restar")}}> <BsFillArrowRightCircleFill className='absolute right-1/2 top-4 text-2xl mx-3 -scale-x-100 text-[#303030] hover:text-yellow-600 transition-all duration-300'/> </button>
         <button onClick={()=>{changeProgress("sumar")}}> <BsFillArrowRightCircleFill className='absolute left-1/2 top-4 text-2xl mx-3 text-[#303030] hover:text-yellow-600 transition-all duration-300'/> </button>
 
+        <div className="absolute right-14 top-[17px] transition-all duration-300 text-[14px] p-1 cursor-pointer rounded-full bg-yellow-600 hover:bg-yellow-500 hover:-rotate-45 "
+        onClick={()=>{setProgreso(null); setEditar(progreso)}}>
+          <BiPencil/>
+        </div>
+
         <motion.div className="h-[85%]"
-        animate={controls} transition={{duration: 0.2, ease: "backOut"}}>
+        animate={controls} transition={{duration: 0.15, ease: "backOut"}}>
           <h1 className="text-4xl font-bold text-yellow-600 ml-5 mt-10"> {rutineProgreso.nombre} </h1>
           <p className="text-2xl w-[80%] text-opacity-80 font-bold text-white ml-5 mt-3"> {rutineProgreso.descripcion} </p>
 
