@@ -15,6 +15,7 @@ export function Navegacion(){
     useEffect(()=>{
         url.includes('rutines') && setPage('rutines')
         url.includes('food') && setPage('food')
+        url.includes('records') && setPage('records')
     }, [url])
     
     return (

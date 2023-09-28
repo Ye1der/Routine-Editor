@@ -130,8 +130,8 @@ export function ContainerRutinas(){
         <BotonCyC></BotonCyC>
         <ButtonTrash></ButtonTrash>
 
-        <section className=' h-[80%] mt-10 flex flex-wrap overflow-auto scrollbar-none scrollbar-track-transparent scrollbar-thumb-grayGym scrollbar-thumb-rounded-full'>
-          <div className={` ${ clickCancelar ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-96' } transition-all duration-300 flex justify-center pb-10`}>
+        <section className=' h-[80%] mt-10 '>
+          <div className={` ${ clickCancelar ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-96' } transition-all duration-300 justify-center pb-10`}>
             <CrearRutina/>
           </div>
         </section>

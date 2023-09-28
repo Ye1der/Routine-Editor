@@ -32,21 +32,15 @@ export function Rutinas(){
             key={index} initial={{opacity: 0, y: -500}} animate={{opacity: 1, y: 0}}> 
 
               <button onClick={()=>{papeleraFunc(index)}} className="transition-all z-10 duration-300 absolute top-3 right-3 text-xl text-red-400 hover:text-red-500" > 
-                {loading !== index && <HiOutlineTrash/>}
-
-                {loading === index && 
-                  <motion.div initial={{scale: 0}} animate={{scale: 1}} className='mr-1'>
-                    <motion.div initial={{rotate: 0}} animate={{rotate: 6000}} transition={{duration: 8, repeat: Infinity}}>
-                      <VscLoading style={{strokeWidth: '1px'}} className="text-base text-red-500"/>
-                    </motion.div>
-                  </motion.div>
-                }
+                <HiOutlineTrash/>
               </button>
 
               <div onClick={()=>{setProgreso(index)}} className="transition-all duration-300 h-56 cursor-pointer absolute top-0 w-full rounded-t-3xl">
-                <h1 className="mt-9 ml-3 text-3xl text-white text-opacity-80 font-bold "> {e.nombre}  </h1>
-                <p className="text-white text-lg font-bold text-opacity-50 mr-4 mt-3 ml-3"> {e.descripcion} </p>
+                <h1 className="mt-7 ml-3 text-3xl text-white text-opacity-80 font-bold "> {e.nombre}  </h1>
+                <p className="text-white text-lg font-bold text-opacity-50 mr-4 mt-3 ml-3 overflow-auto"> {e.descripcion.slice(0, 50) + " ..."} </p>
               </div>
+
+              <h2 className="absolute bottom-12 right-3 text-white text-xl text-opacity-50 font-bold"> {e.dia} </h2>
 
               <button className="transition-all duration-300 absolute bg-yellow-600 w-full h-10 bottom-0 rounded-b-3xl flex items-center justify-center text-lg hover:bg-yellow-500 z-20 focus:h-full focus:rounded-3xl focus:cursor-default focus:hover:bg-yellow-600" 
               onFocus={()=>{setFocus(index)}} onBlur={()=>{setFocus(null); setEliminar(false)}}>

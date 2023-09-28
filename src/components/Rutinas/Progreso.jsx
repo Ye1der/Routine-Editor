@@ -76,7 +76,7 @@ export function Progreso(){
         <motion.div className="h-[85%]"
         animate={controls} transition={{duration: 0.15, ease: "backOut"}}>
           <h1 className="text-4xl font-bold text-yellow-600 ml-5 mt-10"> {rutineProgreso.nombre} </h1>
-          <p className="text-2xl w-[80%] text-opacity-80 font-bold text-white ml-5 mt-3"> {rutineProgreso.descripcion} </p>
+          <p className="text-2xl w-[80%] h-[96px] text-opacity-80 font-bold text-white ml-5 mt-3 overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-600 scrollbar-thumb-rounded-full"> {rutineProgreso.descripcion} </p>
 
           <div className="w-[90%] h-[40%] mt-6 ml-5 mr-2 text-xl overflow-auto justify-center scrollbar-thin scrollbar-track-transparent scrollbar-thumb-rounded-full scrollbar-thumb-gray-500 ">
             {rutineProgreso.ejercicios.map( (rutine, index) => {

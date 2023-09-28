@@ -7,6 +7,7 @@ import './index.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import { AppFood } from './AppFood.jsx'
 import { ContextProvider } from './Context/Context.jsx'
+import { AppRecords } from './AppRecords.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/main/food' element={<AppFood/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/logout' element={<LogOut/>}/>
+        <Route path='/main/records' element={<AppRecords/>}/>
       </Routes>
     </BrowserRouter>
     </ContextProvider>
