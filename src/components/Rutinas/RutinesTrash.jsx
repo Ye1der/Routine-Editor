@@ -36,7 +36,7 @@ export function RutinesTrash(){
           key={index} initial={{opacity: 0, y: 200}} animate={{opacity: 1, y:0}} exit={{opacity: 0, y: 200}}> 
 
             <h1 className="mt-9 ml-3 text-3xl text-white text-opacity-80 font-bold "> {e.nombre} </h1>
-            <p className="text-white text-lg font-bold text-opacity-50 mr-4 mt-3 ml-3"> {e.descripcion} </p>
+            <p className="text-white text-lg font-bold text-opacity-50 mr-4 mt-3 ml-3"> {e.descripcion.slice(0, 50) + " ..."} </p>
 
             <button className="transition-all duration-300 absolute bg-red-600 w-full h-10 bottom-0 rounded-b-3xl flex items-center justify-center text-lg hover:bg-red-700 z-10 focus:h-full focus:rounded-3xl focus:cursor-default focus:hover:bg-red-600" 
             onFocus={()=>{setFocus(index)}} onBlur={()=>{setFocus(null), setEliminar(false)}}>

@@ -60,10 +60,10 @@ export function Progreso(){
         
         <TiDelete onClick={()=>{setProgreso(null)}} className="absolute top-3 right-3 text-red-500 text-opacity-90 text-[33px] cursor-pointer hover:text-red-600 hover:rotate-180 hover:text-opacity-100 transition-all duration-300"/>
 
-        <motion.h1 className="text-xs absolute text-white font-bold text-opacity-60 bottom-3 right-5"
-        animate={controls} transition={{duration: 0.15, ease: "backOut"}}>
-          {rutineProgreso.fecha} 
-        </motion.h1>
+        <motion.div animate={controls} transition={{duration: 0.15, ease: "backOut"}} 
+        className="absolute left-5 top-12 text-white text-xl text-opacity-50 font-bold">
+          {rutineProgreso.dia}
+        </motion.div>
 
         <button onClick={()=>{changeProgress("restar")}}> <BsFillArrowRightCircleFill className='absolute right-1/2 top-4 text-2xl mx-3 -scale-x-100 text-[#303030] hover:text-yellow-600 transition-all duration-300'/> </button>
         <button onClick={()=>{changeProgress("sumar")}}> <BsFillArrowRightCircleFill className='absolute left-1/2 top-4 text-2xl mx-3 text-[#303030] hover:text-yellow-600 transition-all duration-300'/> </button>
@@ -75,8 +75,8 @@ export function Progreso(){
 
         <motion.div className="h-[85%]"
         animate={controls} transition={{duration: 0.15, ease: "backOut"}}>
-          <h1 className="text-4xl font-bold text-yellow-600 ml-5 mt-10"> {rutineProgreso.nombre} </h1>
-          <p className="text-2xl w-[80%] h-[96px] text-opacity-80 font-bold text-white ml-5 mt-3 overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-600 scrollbar-thumb-rounded-full"> {rutineProgreso.descripcion} </p>
+          <h1 className="text-4xl font-bold text-yellow-600 ml-5 mt-14"> {rutineProgreso.nombre} </h1>
+          <p className="text-2xl w-[80%] max-h-[96px] text-opacity-80 font-bold text-white ml-5 mt-3 overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-600 scrollbar-thumb-rounded-full"> {rutineProgreso.descripcion} </p>
 
           <div className="w-[90%] h-[40%] mt-6 ml-5 mr-2 text-xl overflow-auto justify-center scrollbar-thin scrollbar-track-transparent scrollbar-thumb-rounded-full scrollbar-thumb-gray-500 ">
             {rutineProgreso.ejercicios.map( (rutine, index) => {
@@ -90,6 +90,11 @@ export function Progreso(){
             })}
           </div>
         </motion.div>
+
+        <motion.h1 className="text-xs absolute text-white font-bold text-opacity-60 bottom-3 right-5"
+        animate={controls} transition={{duration: 0.15, ease: "backOut"}}>
+          {rutineProgreso.fecha} 
+        </motion.h1>
 
 
       </motion.div>

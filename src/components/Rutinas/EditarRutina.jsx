@@ -10,6 +10,8 @@ import {MdClose} from 'react-icons/md'
 import { TiDelete } from 'react-icons/ti'
 import {FaRegEye} from 'react-icons/fa'
 import { VscLoading } from 'react-icons/vsc'
+import { BiRightArrowAlt } from 'react-icons/bi'
+import { useAnimation } from 'framer-motion'
 
 export function EditarRutina(){
   const refDiv = useRef(null)
@@ -45,11 +47,14 @@ export function EditarRutina(){
     const date = new Date();
     const fecha = `${date.getDate()} / ${date.getMonth() + 1} / ${date.getFullYear()}`
 
+    const Dia = daySelected.charAt(0).toUpperCase() + daySelected.slice(1) // Convierte la primer letra a mayucula
+
     const objectRutine = {
         nombre: data.nombre,
         descripcion: data.descripcion,
         ejercicios: arrayEjercicios,
         fecha: fecha,
+        dia: Dia
     }
 
     const progreso = usuario.rutines[editar].progreso
@@ -66,9 +71,25 @@ export function EditarRutina(){
 
   const objectRutine = usuario.rutines[editar]
 
+  const stylesDays = "text-xl text-white font-bold hover:text-opacity-100 cursor-pointer transition-all duration-300" // estilos de los 7 dias de la semana
+  const dia = objectRutine.dia.toLowerCase();
+  const [daySelected, setDaySelected] = useState(dia)
+  const daysAnimation = useAnimation()
+  const [showDaysVerify, setShowDaysVerify] = useState(true);
+  
+  async function showDays(verify){
+    setShowDaysVerify(!showDaysVerify)
+    verify && await daysAnimation.start({x: 330, scale: 1})
+    !verify && await daysAnimation.start({x: 0, scale: 0})
+  }
+
+  function selectDay(dia){
+    daySelected == dia ? setDaySelected('') : setDaySelected(dia)
+  }
+
   return(
     <div className='absolute z-20 flex items-center justify-center bg-black bg-opacity-80 w-full h-full'>
-      <motion.div className='bg-grayGym w-[370px] h-[440px] rounded-3xl relative'
+      <motion.div className='bg-grayGym w-[370px] h-[440px] rounded-3xl relative z-10'
       ref={refDiv} initial={{opacity: 0, y: -500, scale: 0}} animate={{opacity: 1, y: 0, scale: 1}} exit={{opacity: 0, y: -500}}> 
       <form className='flex flex-col overflow-auto w-[90%] m-auto'
         onSubmit={handleSubmit(onSubmit)}>
@@ -141,8 +162,24 @@ export function EditarRutina(){
               </motion.div>
           }
 
+          <button type='button' onClick={async()=>{await showDays(showDaysVerify)}}
+            className={` ${!showDaysVerify && 'bg-opacity-10'} absolute left-4 bottom-3 flex items-center px-3 py-1 rounded-xl bg-white bg-opacity-0 text-xl text-white text-opacity-80 font-bold transition-all duration-200 hover:bg-opacity-10 hover:text-opacity-100`}>
+            Dia <BiRightArrowAlt/>
+          </button>
+
       </form>
     </motion.div>
+
+    <motion.section initial={{scale: 0}} animate={daysAnimation}
+       className='absolute right-[50%] bg-grayGym w-[130px] h-[280px] pl-4 rounded-3xl flex flex-col gap-2 justify-center'>
+        <h1 onClick={()=>{selectDay('lunes')}} className={`${stylesDays} ${daySelected == "lunes" ? 'text-opacity-100' : 'text-opacity-50'}`}> Lunes </h1>
+        <h1 onClick={()=>{selectDay('martes')}} className={`${stylesDays} ${daySelected == "martes" ? 'text-opacity-100' : 'text-opacity-50'}`}> Martes </h1>
+        <h1 onClick={()=>{selectDay('miercoles')}} className={`${stylesDays} ${daySelected == "miercoles" ? 'text-opacity-100' : 'text-opacity-50'}`}> Miercoles </h1>
+        <h1 onClick={()=>{selectDay('jueves')}} className={`${stylesDays} ${daySelected == "jueves" ? 'text-opacity-100' : 'text-opacity-50'}`}> Jueves </h1>
+        <h1 onClick={()=>{selectDay('viernes')}} className={`${stylesDays} ${daySelected == "viernes" ? 'text-opacity-100' : 'text-opacity-50'}`}> Viernes </h1>
+        <h1 onClick={()=>{selectDay('sabado')}} className={`${stylesDays} ${daySelected == "sabado" ? 'text-opacity-100' : 'text-opacity-50'}`}> Sabado </h1>
+        <h1 onClick={()=>{selectDay('domingo')}} className={`${stylesDays} ${daySelected == "domingo" ? 'text-opacity-100' : 'text-opacity-50'}`}> Domingo </h1>
+    </motion.section>
     </div>
   )
 }

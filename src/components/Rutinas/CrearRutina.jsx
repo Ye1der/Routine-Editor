@@ -41,7 +41,7 @@ export function CrearRutina(){
     const date = new Date();
     const fecha = `${date.getDate()} / ${date.getMonth() + 1} / ${date.getFullYear()}`
 
-    const Dia = daySelected.charAt(0).toUpperCase() + daySelected.slice(1) // Comvierte la primer letra a mayucula
+    const Dia = daySelected.charAt(0).toUpperCase() + daySelected.slice(1) // Convierte la primer letra a mayucula
 
     const objectRutine = {
       nombre: data.nombre,
@@ -57,8 +57,8 @@ export function CrearRutina(){
     setLoading(null)
   }
 
-  const stylesDays = "text-xl text-white font-bold text-opacity-50 hover:text-opacity-100 cursor-pointer transition-all duration-300" // estilos de los 7 dias de la semana
-  const [daySelected, setDaySelected] = useState()
+  const stylesDays = "text-xl text-white font-bold hover:text-opacity-100 cursor-pointer transition-all duration-300" // estilos de los 7 dias de la semana
+  const [daySelected, setDaySelected] = useState('')
   const daysAnimation = useAnimation()
   const [showDaysVerify, setShowDaysVerify] = useState(true);
   
@@ -66,6 +66,10 @@ export function CrearRutina(){
     setShowDaysVerify(!showDaysVerify)
     verify && await daysAnimation.start({x: 420, scale: 1})
     !verify && await daysAnimation.start({x: 0, scale: 0})
+  }
+
+  function selectDay(dia){
+    daySelected == dia ? setDaySelected('') : setDaySelected(dia)
   }
 
   return(
@@ -150,13 +154,13 @@ export function CrearRutina(){
 
       <motion.section initial={{scale: 0}} animate={daysAnimation}
        className='absolute left-0 bg-grayGym w-[130px] h-[280px] pl-4 rounded-3xl flex flex-col gap-2 justify-center'>
-        <h1 onClick={()=>{setDaySelected('lunes')}} className={`${stylesDays} ${daySelected == "lunes" && 'text-opacity-100'}`}> Lunes </h1>
-        <h1 onClick={()=>{setDaySelected('martes')}} className={`${stylesDays} ${daySelected == "martes" && 'text-opacity-100'}`}> Martes </h1>
-        <h1 onClick={()=>{setDaySelected('miercoles')}} className={`${stylesDays} ${daySelected == "miercoles" && 'text-opacity-100'}`}> Miercoles </h1>
-        <h1 onClick={()=>{setDaySelected('jueves')}} className={`${stylesDays} ${daySelected == "jueves" && 'text-opacity-100'}`}> Jueves </h1>
-        <h1 onClick={()=>{setDaySelected('viernes')}} className={`${stylesDays} ${daySelected == "viernes" && 'text-opacity-100'}`}> Viernes </h1>
-        <h1 onClick={()=>{setDaySelected('sabado')}} className={`${stylesDays} ${daySelected == "sabado" && 'text-opacity-100'}`}> Sabado </h1>
-        <h1 onClick={()=>{setDaySelected('domingo')}} className={`${stylesDays} ${daySelected == "domingo" && 'text-opacity-100'}`}> Domingo </h1>
+        <h1 onClick={()=>{selectDay('lunes')}} className={`${stylesDays} ${daySelected == "lunes" ? 'text-opacity-100' : 'text-opacity-50'}`}> Lunes </h1>
+        <h1 onClick={()=>{selectDay('martes')}} className={`${stylesDays} ${daySelected == "martes" ? 'text-opacity-100' : 'text-opacity-50'}`}> Martes </h1>
+        <h1 onClick={()=>{selectDay('miercoles')}} className={`${stylesDays} ${daySelected == "miercoles" ? 'text-opacity-100' : 'text-opacity-50'}`}> Miercoles </h1>
+        <h1 onClick={()=>{selectDay('jueves')}} className={`${stylesDays} ${daySelected == "jueves" ? 'text-opacity-100' : 'text-opacity-50'}`}> Jueves </h1>
+        <h1 onClick={()=>{selectDay('viernes')}} className={`${stylesDays} ${daySelected == "viernes" ? 'text-opacity-100' : 'text-opacity-50'}`}> Viernes </h1>
+        <h1 onClick={()=>{selectDay('sabado')}} className={`${stylesDays} ${daySelected == "sabado" ? 'text-opacity-100' : 'text-opacity-50'}`}> Sabado </h1>
+        <h1 onClick={()=>{selectDay('domingo')}} className={`${stylesDays} ${daySelected == "domingo" ? 'text-opacity-100' : 'text-opacity-50'}`}> Domingo </h1>
       </motion.section>
     </main>
   )

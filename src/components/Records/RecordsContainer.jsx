@@ -1,7 +1,14 @@
+import { Calcular1RM } from "./Calcular1RM";
+
 export function RecordsContainer(){
   return(
-    <main className="h-screen w-[77%] ml-[1%] flex flex-col items-center transition-all duration-300">
-      <h1 className="text-white" > Hola </h1>
+    <main className="h-screen w-[77%] ml-[1%]">
+
+      <div className="w-[33%] pt-14">
+        <Calcular1RM/>
+      </div>
+
     </main>
+
   )
 }
