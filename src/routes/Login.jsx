@@ -52,7 +52,9 @@ export function Login(){
                 email: user.email,
                 name: user.displayName,
                 rutines: [],
-                rutinesTrash: []
+                rutinesTrash: [],
+                corporalMeasures: [],
+                objectiveExercises: [] 
             }
 
             await addUser(object)

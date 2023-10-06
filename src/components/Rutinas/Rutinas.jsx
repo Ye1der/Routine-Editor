@@ -7,7 +7,7 @@ import {VscLoading} from 'react-icons/vsc'
 
 export function Rutinas(){
 
-  const {progreso, setProgreso, eliminarRutina, loading, setLoading, clickCrear, usuario, activeEfect, setActiveEfect, focus, setFocus, setVerRutina, setEditar, eliminar, setEliminar, papelera, setPapelera} = useContext(contextGlobal)
+  const {setProgreso, eliminarRutina, setLoading, clickCrear, usuario, focus, setFocus, setEditar, eliminar, setEliminar} = useContext(contextGlobal)
   const focusRefEliminar = useRef(null)
 
   async function papeleraFunc(index){

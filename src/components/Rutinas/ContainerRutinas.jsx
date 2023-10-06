@@ -18,8 +18,8 @@ import { Progreso } from "./Progreso"
 
 export function ContainerRutinas(){
 
-  const {setLoading, progreso, render, clickCancelar, clickCrear, usuario, setUsuario, activeEfect, renderTrash, editar, verRutina, setEditar, setVerRutina, setFocus} = useContext(contextGlobal)
-
+  const {progreso, render, clickCancelar, clickCrear, usuario, setUsuario, activeEfect, renderTrash, editar, verRutina, setFocus} = useContext(contextGlobal)
+  
   useEffect(()=>{
     onAuthStateChanged(auth, userInfo)
     setFocus(null)
@@ -49,7 +49,7 @@ export function ContainerRutinas(){
       <div className={`${ clickCrear ? 'scale-0 opacity-0' : 'scale-100 opacity-100' } h-screen w-[77%] ml-[1%] flex flex-col items-center transition-all duration-300 `}>
         <section className=' h-[80%] mt-10 flex flex-wrap scrollbar-thin scrollbar-track-transparent scrollbar-thumb-grayGym scrollbar-thumb-rounded-full items-center justify-center'>
           <motion.div initial={{scale: 0}} animate={{scale: 1}}>
-            <motion.div initial={{rotate: 0}} animate={{rotate: 12000}} transition={{duration: 16}} >
+            <motion.div initial={{rotate: 0}} animate={{rotate: 720}} transition={{duration: 1, ease: "linear", repeat: Infinity}} >
               <VscLoading style={{strokeWidth: '1px'}} className="text-4xl text-opacity-50 text-white"/>
             </motion.div>
           </motion.div>

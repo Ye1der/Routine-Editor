@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { Food } from "./Food";
 import { SearchFood } from "./SearchFood";
+import { contextGlobal } from "../../Context/Context";
 
 export function ContainerFood(){
 
