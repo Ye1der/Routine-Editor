@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { Boton } from './Boton'
-import logo from '../../img/logo-bgTransparent.png'
+import logo from '../../img/logo.webp'
 import { CerrarSesion } from './CerrarSesion'
 import { useNavigate } from 'react-router'
 import { contextGlobal } from '../../Context/Context'

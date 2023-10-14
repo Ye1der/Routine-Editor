@@ -6,10 +6,12 @@ import {FaFacebook} from 'react-icons/fa'
 import { useEffect, useState } from 'react'
 
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth"
-import { addUser, auth, existDbUser, userExist, iniciarSesion } from "../firebase/firebase"
+import { addUser, auth, existDbUser, userExist, iniciarSesion } from "../../firebase/firebase"
 import { useNavigate } from "react-router";
 
 export function Login(){
+
+    window.history.replaceState(null, null, window.location.pathname);
 
     const navigate = useNavigate()
 

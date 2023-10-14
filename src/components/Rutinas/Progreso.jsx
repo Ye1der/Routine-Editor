@@ -68,12 +68,12 @@ export function Progreso(){
         <button onClick={()=>{changeProgress("restar")}}> <BsFillArrowRightCircleFill className='absolute right-1/2 top-4 text-2xl mx-3 -scale-x-100 text-[#303030] hover:text-yellow-600 transition-all duration-300'/> </button>
         <button onClick={()=>{changeProgress("sumar")}}> <BsFillArrowRightCircleFill className='absolute left-1/2 top-4 text-2xl mx-3 text-[#303030] hover:text-yellow-600 transition-all duration-300'/> </button>
 
-        <div className="absolute right-14 top-[17px] transition-all duration-300 text-[14px] p-1 cursor-pointer rounded-full bg-yellow-600 hover:bg-yellow-500 hover:-rotate-45 "
+        <div className="absolute right-14 top-[17px] transition-all duration-300 text-[14px] p-1 cursor-pointer rounded-full bg-yellow-600 hover:bg-yellow-500"
         onClick={()=>{setProgreso(null); setEditar(progreso)}}>
           <BiPencil/>
         </div>
 
-        <motion.div className="h-[85%]"
+        <motion.div className="h-[82%]"
         animate={controls} transition={{duration: 0.15, ease: "backOut"}}>
           <h1 className="text-4xl font-bold text-yellow-600 ml-5 mt-14"> {rutineProgreso.nombre} </h1>
           <p className="text-2xl w-[80%] max-h-[96px] text-opacity-80 font-bold text-white ml-5 mt-3 overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-600 scrollbar-thumb-rounded-full"> {rutineProgreso.descripcion} </p>

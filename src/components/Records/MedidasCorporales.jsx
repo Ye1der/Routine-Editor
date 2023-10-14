@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { useContext, useState, useEffect} from "react"
+import { useContext, useState} from "react"
 import {BsArrowLeftShort} from 'react-icons/bs'
 import {AiOutlineEdit} from 'react-icons/ai'
 import {HiOutlineTrash} from 'react-icons/hi'
@@ -9,29 +9,17 @@ import {BiCheck} from 'react-icons/bi'
 import { contextGlobal } from "../../Context/Context"
 import { updateUser } from "../../firebase/firebase"
 import {FaBoxOpen} from 'react-icons/fa'
-import { onAuthStateChanged } from "firebase/auth"
-import { auth } from "../../firebase/firebase"
-import { returnData } from "../../firebase/firebase"
 import {VscLoading} from 'react-icons/vsc'
 
 export function MedidasCorporales(){
 
   const {usuario, setUsuario} = useContext(contextGlobal)
 
-  useEffect(()=>{
-    onAuthStateChanged(auth, userInfo)
-  }, [])
-
-  async function userInfo(user){
-    const data = await returnData(user.email)
-    await setUsuario(data)
-  }
-
   const [swich, setSwich] = useState('list')
   const [indexMeasure, setIndexMeasure] = useState()
   const [loading, setLoading] = useState(false)
 
-  const {handleSubmit, register} = useForm()
+  const {handleSubmit, register, reset} = useForm()
 
   async function onSubmit(data){
     setLoading(true)
@@ -54,6 +42,7 @@ export function MedidasCorporales(){
     
     setSwich('list')
     setLoading(false)
+    reset()
   }
 
   async function deleteMeasure(index){
@@ -72,7 +61,11 @@ export function MedidasCorporales(){
             <motion.section initial={{scale: 0}} animate={{scale: 1}} className="relative h-[90%] w-[95%] rounded-2xl overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-600 scrollbar-thumb-rounded-full">
 
               {usuario == null &&
-                <div> cargando... </div>
+                <div className="h-full w-full grid place-content-center">
+                  <motion.div initial={{rotate: 0}} animate={{rotate: 720}} transition={{duration: 1, ease: "linear", repeat: Infinity}}>
+                    <VscLoading style={{strokeWidth: '1px'}} className="text-2xl text-opacity-50 text-white"/>
+                  </motion.div>
+                </div>
               }
 
               {usuario != null && usuario.corporalMeasures.length > 0 && usuario.corporalMeasures.map((obj, index)=>{
@@ -115,21 +108,21 @@ export function MedidasCorporales(){
             <motion.div initial={{scale: 0}} animate={{scale: 1}} className="h-full w-full rounded-2xl">
               <form onSubmit={handleSubmit(onSubmit)}>
 
-                <RiCloseFill onClick={()=>{setSwich('show')}} className="absolute right-2 top-2 text-2xl text-white text-opacity-50 cursor-pointer hover:text-opacity-100 hover:rotate-90 transition-all duration-300"/>
+                <RiCloseFill onClick={()=>{setSwich('show'); reset()}} className="absolute right-2 top-2 text-2xl text-white text-opacity-50 cursor-pointer hover:text-opacity-100 hover:rotate-90 transition-all duration-300"/>
 
                 <input className="text-white text-xl font-bold bg-transparent ml-8 mb-1 mt-5 outline-none cursor-pointer focus:placeholder:text-opacity-70 placeholder:font-bold placeholder:text-white placeholder:text-opacity-40 placeholder:text-xl" defaultValue={usuario.corporalMeasures[indexMeasure].nombre}
-                type="text" placeholder="Nombre" {...register('nombre', {required: true})}/>
+                type="text" placeholder="Nombre" {...register('nombre', {required: true})} autoComplete="off"/>
 
                 <div className=" mt-2 ml-8 ">
                   <label className="text-white text-xl font-bold text-opacity-70 cursor-pointer" htmlFor="actual"> Actual: </label>
-                  <input className="text-white absolute right-8 ml-5 bg-transparent text-center border-b-2 border-white border-opacity-20 w-[50px] font-bold placeholder:font-bold outline-none caret-transparent hover:border-opacity-100 focus:border-opacity-100 transition-all duration-300" defaultValue={usuario.corporalMeasures[indexMeasure].actual}
-                  id="actual" type="text" placeholder="-" {...register('actual', {required: true})}/>
+                  <input className="numeric-input text-white absolute right-8 ml-5 bg-transparent text-center border-b-2 border-white border-opacity-20 w-[50px] font-bold placeholder:font-bold outline-none caret-transparent hover:border-opacity-100 focus:border-opacity-100 transition-all duration-300" defaultValue={usuario.corporalMeasures[indexMeasure].actual}
+                  id="actual" type="number" placeholder="-" {...register('actual', {required: true})} autoComplete="off"/>
                 </div>
 
                 <div className="ml-8 mt-3">
                   <label className="text-white text-xl font-bold text-opacity-70 cursor-pointer" htmlFor="objetivo"> Objetivo: </label>
-                  <input className="text-white absolute right-8 bg-transparent text-center border-b-2 border-white border-opacity-20 w-[50px] font-bold placeholder:font-bold outline-none caret-transparent hover:border-opacity-100 focus:border-opacity-100 transition-all duration-300" defaultValue={usuario.corporalMeasures[indexMeasure].objetivo}
-                  id="objetivo" type="text" placeholder="-" {...register('objetivo', {required: true})}/>
+                  <input className="numeric-input text-white absolute right-8 bg-transparent text-center border-b-2 border-white border-opacity-20 w-[50px] font-bold placeholder:font-bold outline-none caret-transparent hover:border-opacity-100 focus:border-opacity-100 transition-all duration-300" defaultValue={usuario.corporalMeasures[indexMeasure].objetivo}
+                  id="objetivo" type="number" placeholder="-" {...register('objetivo', {required: true})} autoComplete="off"/>
                 </div>
 
               </form>
@@ -140,18 +133,18 @@ export function MedidasCorporales(){
             <motion.div initial={{scale: 0}} animate={{scale: 1}} className="h-full w-full rounded-2xl">
               <form onSubmit={handleSubmit(onSubmit)}>
 
-                <RiCloseFill onClick={()=>{setSwich('list')}} className="absolute right-2 top-2 text-2xl text-white text-opacity-50 cursor-pointer hover:text-opacity-100 hover:rotate-90 transition-all duration-300"/>
+                <RiCloseFill onClick={()=>{setSwich('list'); reset()}} className="absolute right-2 top-2 text-2xl text-white text-opacity-50 cursor-pointer hover:text-opacity-100 hover:rotate-90 transition-all duration-300"/>
 
-                <input className="text-white text-xl font-bold bg-transparent ml-8 mb-1 mt-5 outline-none cursor-pointer focus:placeholder:text-opacity-70 placeholder:font-bold placeholder:text-white placeholder:text-opacity-40 placeholder:text-xl" type="text" placeholder="Nombre" {...register('nombre', {required: true})}/>
+                <input className="text-white text-xl font-bold bg-transparent ml-8 mb-1 mt-5 outline-none cursor-pointer focus:placeholder:text-opacity-70 placeholder:font-bold placeholder:text-white placeholder:text-opacity-40 placeholder:text-xl" type="text" placeholder="Nombre" {...register('nombre', {required: true})} autoComplete="off"/>
 
                 <div className=" mt-2 ml-8 ">
                   <label className="text-white text-xl font-bold text-opacity-70 cursor-pointer" htmlFor="actual"> Actual: </label>
-                  <input className="text-white absolute right-8 ml-5 bg-transparent text-center border-b-2 border-white border-opacity-20 w-[50px] font-bold placeholder:font-bold outline-none caret-transparent hover:border-opacity-100 focus:border-opacity-100 transition-all duration-300" id="actual" type="text" placeholder="-" {...register('actual', {required: true})}/>
+                  <input className="numeric-input text-white absolute right-8 ml-5 bg-transparent text-center border-b-2 border-white border-opacity-20 w-[50px] font-bold placeholder:font-bold outline-none caret-transparent hover:border-opacity-100 focus:border-opacity-100 transition-all duration-300" id="actual" type="number" placeholder="-" {...register('actual', {required: true})} autoComplete="off"/>
                 </div>
 
                 <div className="ml-8 mt-3">
                   <label className="text-white text-xl font-bold text-opacity-70 cursor-pointer" htmlFor="objetivo"> Objetivo: </label>
-                  <input className="text-white absolute right-8 bg-transparent text-center border-b-2 border-white border-opacity-20 w-[50px] font-bold placeholder:font-bold outline-none caret-transparent hover:border-opacity-100 focus:border-opacity-100 transition-all duration-300" id="objetivo" type="text" placeholder="-" {...register('objetivo', {required: true})}/>
+                  <input className="numeric-input text-white absolute right-8 bg-transparent text-center border-b-2 border-white border-opacity-20 w-[50px] font-bold placeholder:font-bold outline-none caret-transparent hover:border-opacity-100 focus:border-opacity-100 transition-all duration-300" id="objetivo" type="number" placeholder="-" {...register('objetivo', {required: true})} autoComplete="off"/>
                 </div>
 
               </form>

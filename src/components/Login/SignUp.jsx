@@ -1,13 +1,12 @@
 
-import { useEffect, useState } from 'react'
+import {useState } from 'react'
 import {BsFillPersonFill} from 'react-icons/bs'
 import {HiLockOpen} from 'react-icons/hi'
 import {HiLockClosed} from 'react-icons/hi'
 import { useNavigate } from 'react-router'
-import { addUser, auth, createUser, userExist } from '../firebase/firebase'
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword} from 'firebase/auth'
+import { createUser, userExist } from '../../firebase/firebase'
 
-export function LogOut(){
+export function SignUp(){
     const navigate = useNavigate()
     const [email, setEmail] = useState(".")
     const [contraseña1, setContraseña1] = useState(".")

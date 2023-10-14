@@ -35,12 +35,12 @@ export function Calcular1RM(){
 
             <div className=" mt-4 ml-5 ">
               <label className="text-white text-xl font-bold text-opacity-70 cursor-pointer" htmlFor="repeticiones"> Repeticiones: </label>
-              <input className="text-white absolute right-5 ml-5 bg-transparent text-center border-b-2 border-white border-opacity-20 w-[50px] font-bold placeholder:font-bold outline-none caret-transparent hover:border-opacity-100 focus:border-opacity-100 transition-all duration-300" id="repeticiones" type="text" placeholder="-" {...register('reps', {required: true})}/>
+              <input className="numeric-input text-white absolute right-5 ml-5 bg-transparent text-center border-b-2 border-white border-opacity-20 w-[50px] font-bold placeholder:font-bold outline-none caret-transparent hover:border-opacity-100 focus:border-opacity-100 transition-all duration-300" id="repeticiones" type="number" placeholder="-" {...register('reps', {required: true})} autoComplete='off'/>
             </div>
 
             <div className="ml-5 mt-3">
               <label className="text-white text-xl font-bold text-opacity-70 cursor-pointer" htmlFor="peso"> Peso / Kgs: </label>
-              <input className="text-white absolute right-5 bg-transparent text-center border-b-2 border-white border-opacity-20 w-[50px] font-bold placeholder:font-bold outline-none caret-transparent hover:border-opacity-100 focus:border-opacity-100 transition-all duration-300" id="peso" type="text" placeholder="-" {...register('kgs', {required: true})}/>
+              <input className="numeric-input text-white absolute right-5 bg-transparent text-center border-b-2 border-white border-opacity-20 w-[50px] font-bold placeholder:font-bold outline-none caret-transparent hover:border-opacity-100 focus:border-opacity-100 transition-all duration-300" id="peso" type="number" placeholder="-" {...register('kgs', {required: true})} autoComplete='off'/>
             </div>
 
             <hr className="w-[90%] mx-auto mt-5 border-[1px] opacity-70" />
