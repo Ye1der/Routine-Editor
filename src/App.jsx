@@ -7,34 +7,49 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import { AppFood } from './AppFood.jsx'
 import { ContextProvider } from './Context/Context.jsx'
 import { AppRecords } from './AppRecords.jsx'
-import { auth } from './firebase/firebase.js'
+import { auth, isAuth } from './firebase/firebase.js'
 import { PrivateRoute } from './ProtectedRoutes.jsx'
-import { onAuthStateChanged } from 'firebase/auth'
 import { useState } from 'react'
+import { LandingPage } from './LandingPage.jsx'
+import { onAuthStateChanged } from 'firebase/auth'
 
 export function App(){
 
   const [autenticated, setAutenticated] = useState()
 
   useEffect(()=>{
-    onAuthStateChanged(auth, userInfo)
+    onAuthStateChanged(auth, validated)
   })
 
-  function userInfo(user){
-    setAutenticated(Boolean(user))
+  function validated(user){
+    if(user){
+      setAutenticated(true)
+    } else {
+      setAutenticated(false)
+    }
   }
 
   return(
     <ContextProvider>
       <BrowserRouter> 
       <Routes>
+
         <Route element={<PrivateRoute inAutenticated={autenticated}/>}>
           <Route path='/main/rutines' element={<AppRutines/>}/>
         </Route>
-        <Route path='/main/food' element={<AppFood/>} />
+
+        <Route element={<PrivateRoute inAutenticated={autenticated}/>}>
+          <Route path='/main/food' element={<AppFood/>}/>
+        </Route>
+
+        <Route element={<PrivateRoute inAutenticated={autenticated}/>}>
+          <Route path='/main/records' element={<AppRecords/>}/>
+        </Route>
+
         <Route path='/login' element={<Login/>}/>
         <Route path='/logout' element={<SignUp/>}/>
-        <Route path='/main/records' element={<AppRecords/>}/>
+        <Route path='/' element={<LandingPage/>}/>
+
       </Routes>
     </BrowserRouter>
     </ContextProvider>

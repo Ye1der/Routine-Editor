@@ -5,6 +5,7 @@ import {HiLockOpen} from 'react-icons/hi'
 import {HiLockClosed} from 'react-icons/hi'
 import { useNavigate } from 'react-router'
 import { createUser, userExist } from '../../firebase/firebase'
+import { motion } from 'framer-motion'
 
 export function SignUp(){
     const navigate = useNavigate()
@@ -16,9 +17,6 @@ export function SignUp(){
     // 3: Correo no valido, 4: Correo ya existente
     // 5: Contraseña muy corta
     const [validador, setValidador] = useState(0)
-
-
-
 
     async function agregarUsuario(){
 
@@ -45,7 +43,7 @@ export function SignUp(){
 
     return (
         <main className="w-full h-screen flex flex-col items-center justify-center " >
-            <div className="bg-grayGym bg-opacity-50 w-96 rounded-3xl" >
+            <motion.div initial={{scale: 0}} animate={{scale: 1}} className="bg-grayGym bg-opacity-50 w-96 rounded-3xl" >
                 <div className='flex justify-end items-center'>
                     <h1 className='hover:text-opacity-90 text-center text-white text-lg text-opacity-75 font-bold my-3 mx-8 cursor-pointer' onClick={()=>{navigate("/login")}} >Iniciar sesion</h1>
                 </div>
@@ -79,7 +77,7 @@ export function SignUp(){
                 <div className='flex justify-center items-center'>
                     <button className='mt-8 mb-6 bg-white bg-opacity-70 w-28 h-8 rounded-lg transition-all duration-200 hover:bg-opacity-90 ' onClick={agregarUsuario}> Crear cuenta </button>
                 </div>
-            </div>
+            </motion.div>
 
             {validador === 1 ? <h1  className='text-red-500 text-opacity-90 text-center font-bold mt-3'  > Las contraseñas no coinciden </h1> : ""}
 

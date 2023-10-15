@@ -98,3 +98,15 @@ export async function iniciarSesion(email, contraseña){
   }
 }
 
+export function isAuth(){
+  return new Promise((resolve, reject) => {
+    onAuthStateChanged(auth, (user) => {
+      if(user){
+        resolve(true)
+      } else {
+        resolve(false)
+      }
+    })
+  })
+}
+
