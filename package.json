@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "start": "serve dist -s -n -L -p $PORT",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "firebase": "^9.22.2",
+    "firebase-tools": "^12.7.0",
     "framer-motion": "10.15.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -19,6 +21,7 @@
     "react-ionicons": "^4.2.1",
     "react-router": "^6.13.0",
     "react-router-dom": "^6.13.0",
+    "serve": "^14.2.1",
     "tailwind-scrollbar": "^3.0.4"
   },
   "devDependencies": {
