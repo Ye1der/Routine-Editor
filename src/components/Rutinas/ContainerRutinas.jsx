@@ -46,7 +46,7 @@ export function ContainerRutinas(){
 
   if(usuario == null && render == true ){ //Tiempo de carga en lo que se obtiene los datos de firebase del usuario
     return(
-      <div className={`${ clickCrear ? 'scale-0 opacity-0' : 'scale-100 opacity-100' } h-screen w-[77%] ml-[1%] flex flex-col items-center transition-all duration-300 `}>
+      <div className={`${ clickCrear ? 'scale-0 opacity-0' : 'scale-100 opacity-100' } h-screen w-full lg:w-[77%] lg:ml-[290px] flex flex-col items-center transition-all duration-300 `}>
         <section className=' h-[80%] mt-10 flex flex-wrap scrollbar-thin scrollbar-track-transparent scrollbar-thumb-grayGym scrollbar-thumb-rounded-full items-center justify-center'>
           <motion.div initial={{scale: 0}} animate={{scale: 1}}>
             <motion.div initial={{rotate: 0}} animate={{rotate: 720}} transition={{duration: 1, ease: "linear", repeat: Infinity}} >
@@ -61,7 +61,7 @@ export function ContainerRutinas(){
 
   if(usuario.rutines.length === 0 && render == true && renderTrash === false){ //Comprueba si el arreglo de rutinas tiene alguna
     return(
-      <div className={`relative h-screen w-[77%] ml-[1%] flex flex-col items-center transition-all duration-300`}>
+      <div className={`relative w-full h-screen lg:w-[77%] lg:ml-[290px] flex flex-col items-center transition-all duration-300`}>
         <BotonCyC></BotonCyC>
         <ButtonTrash/>
 
@@ -81,7 +81,7 @@ export function ContainerRutinas(){
 
   if(render === true && usuario != null && renderTrash === false){ //Renderiza las rutinas que se hallan en el array de rutinas, si las hay
     return (
-      <div className="relative h-screen w-[77%] ml-[1%] flex flex-col items-center">
+      <div className="relative h-screen w-full lg:w-[77%] lg:ml-[290px] flex flex-col items-center">
         <BotonCyC></BotonCyC>
         <ButtonTrash></ButtonTrash>
         <Rutinas></Rutinas>
@@ -96,7 +96,7 @@ export function ContainerRutinas(){
 
   if(renderTrash === true && usuario != null && render === true && usuario.rutinesTrash.length < 1){
     return(
-      <div className={`relative h-screen w-[77%] ml-[1%] flex flex-col items-center transition-all duration-300`}>
+      <div className={`relative h-screen w-full lg:w-[77%] lg:ml-[290px] flex flex-col items-center transition-all duration-300`}>
         <BotonCyC></BotonCyC>
         <ButtonTrash/>
         <ButtonVoidTrash></ButtonVoidTrash>
@@ -115,7 +115,7 @@ export function ContainerRutinas(){
   if (renderTrash === true && usuario != null && render === true && usuario.rutinesTrash.length > 0) {
     
     return (
-      <div className="relative h-screen w-[77%] ml-[1%] flex flex-col items-center ">
+      <div className="relative h-screen w-full lg:w-[77%] lg:ml-[290px] flex flex-col items-center ">
         <BotonCyC></BotonCyC>
         <ButtonTrash></ButtonTrash>
         <ButtonVoidTrash></ButtonVoidTrash>
@@ -126,7 +126,7 @@ export function ContainerRutinas(){
   
   if(!render){ //Renderiza el formulario de crear rutina si el render esta en false 
     return (
-      <div className="relative h-screen w-[77%] ml-[1%] flex flex-col items-center">
+      <div className="relative h-screen w-full lg:w-[77%] lg:ml-[290px] flex flex-col items-center">
         <BotonCyC></BotonCyC>
         <ButtonTrash></ButtonTrash>
 

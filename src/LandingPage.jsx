@@ -39,7 +39,7 @@ export function LandingPage(){
         </button>
       </motion.div>
 
-      <motion.div animate={leftAnimate} transition={{duration: 0.3, ease: 'backIn'}} className='w-2/6 ml-24 -mr-20'>
+      <motion.div animate={leftAnimate} transition={{duration: 0.3, ease: 'backIn'}} className='w-[340px]'>
         <h1 className='text-[60px] text-white font-bold leading-[70px]'> <span className='text-yellow-500'> Crea</span>, edita y <span className='text-yellow-500'> gestiona </span> tus rutinas </h1>
         <h1 className='text-xl text-white text-opacity-50 font-bold mt-5'> Organiza tus rutinas, alimentos y marcas personales </h1>
 
@@ -49,8 +49,8 @@ export function LandingPage(){
         </button>
       </motion.div>
       
-      <motion.div animate={rightAnimate} transition={{duration: 0.3, ease: 'backIn'}}>
-        <img className='' src={logo} alt="Logo" />
+      <motion.div className='md:-mr-20' animate={rightAnimate} transition={{duration: 0.3, ease: 'backIn'}}>
+        <img className='w-0  md:w-[400px]   lg:w-auto' src={logo} alt="Logo" />
       </motion.div>
 
       <motion.div animate={leftAnimate} transition={{duration: 0.3, ease: 'backIn'}} className='absolute left-10 top-5 gap-4 flex text-2xl'>

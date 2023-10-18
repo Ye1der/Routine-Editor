@@ -43,7 +43,8 @@ export function SignUp(){
 
     return (
         <main className="w-full h-screen flex flex-col items-center justify-center " >
-            <motion.div initial={{scale: 0}} animate={{scale: 1}} className="bg-grayGym bg-opacity-50 w-96 rounded-3xl" >
+            <motion.div className="bg-grayGym bg-opacity-50 w-96 rounded-3xl" 
+            initial={{scale: 0}} animate={{scale: window.innerWidth < 640 ? 0.9 : 1}}>
                 <div className='flex justify-end items-center'>
                     <h1 className='hover:text-opacity-90 text-center text-white text-lg text-opacity-75 font-bold my-3 mx-8 cursor-pointer' onClick={()=>{navigate("/login")}} >Iniciar sesion</h1>
                 </div>
