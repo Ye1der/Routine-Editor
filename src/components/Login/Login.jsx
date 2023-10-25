@@ -9,7 +9,8 @@ import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "firebas
 import { addUser, auth, existDbUser, userExist, iniciarSesion } from "../../firebase/firebase"
 import { useNavigate } from "react-router";
 
-import { motion } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
+import { VscLoading } from 'react-icons/vsc'
 
 export function Login(){
 
@@ -25,6 +26,7 @@ export function Login(){
     const [invalidUser, setInvalidUser] = useState(0);
 
     const [scale, setScale] = useState(0.9)
+    const [login, setLogin] = useState(false)
 
     //Inicio de sesion con google 
     async function loginGoogle(){
@@ -72,6 +74,7 @@ export function Login(){
 
     // Inicia sesion con una cuenta creada
     async function verificadorLocal(){
+        setLogin(true)
         const existAcount = await userExist(email)
         
         if(existAcount){
@@ -86,6 +89,7 @@ export function Login(){
         } else {
             setInvalidUser(1)
         }
+        setLogin(false)
     }
     
     return (
@@ -116,7 +120,17 @@ export function Login(){
                     type="password" placeholder="Contraseña" id='contraseña'/>
                 </div>
 
-                <div className='flex items-center justify-center'> <button className='mt-8 bg-white bg-opacity-70 w-28 h-8 rounded-lg transition-all duration-200 hover:bg-opacity-90 ' onClick={verificadorLocal}> Iniciar sesion </button> </div>
+                {!login ? 
+                    <motion.div initial={{scale: 0}} animate={{scale: 1}} className='flex items-center justify-center'> 
+                        <button className='mt-8 bg-white bg-opacity-70 w-28 h-8 rounded-lg transition-all duration-200 hover:bg-opacity-90 ' onClick={verificadorLocal}> Iniciar sesion </button> 
+                    </motion.div>
+                    :
+                    <div className='flex items-center justify-center h-8 mt-8' >
+                        <motion.div initial={{rotate: 0}} animate={{rotate: 720}} transition={{duration: 1, ease: "linear", repeat: Infinity}} >
+                            <VscLoading style={{strokeWidth: '0.7px'}} className="text-2xl text-white"/>
+                        </motion.div>
+                    </div>
+                }
 
                 <div className='flex gap-3 w-full items-center justify-center mt-8 mb-6'>
                     <div className='cursor-pointer flex items-center justify-center bg-red-500 bg-opacity-75 p-2 rounded-full hover:bg-opacity-90 transition-all duration-200 w-10 h-10' 

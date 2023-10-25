@@ -6,12 +6,14 @@ import {HiLockClosed} from 'react-icons/hi'
 import { useNavigate } from 'react-router'
 import { createUser, userExist } from '../../firebase/firebase'
 import { motion } from 'framer-motion'
+import { VscLoading } from 'react-icons/vsc'
 
 export function SignUp(){
     const navigate = useNavigate()
     const [email, setEmail] = useState(".")
     const [contraseña1, setContraseña1] = useState(".")
     const [contraseña2, setContraseña2] = useState("..")
+    const [createAcount, setCreateAcount] = useState();
 
     // 1: Contraseñas no coinciden, 2: Exito al crear la cuenta
     // 3: Correo no valido, 4: Correo ya existente
@@ -19,6 +21,7 @@ export function SignUp(){
     const [validador, setValidador] = useState(0)
 
     async function agregarUsuario(){
+        setCreateAcount(true)
 
         if(contraseña1.length > 6){
 
@@ -39,10 +42,12 @@ export function SignUp(){
                 setValidador(1)
             }
         } else (setValidador(5))
+
+        setCreateAcount(false)
     }
 
     return (
-        <main className="w-full h-screen flex flex-col items-center justify-center " >
+        <main className="w-full h-screen flex flex-col items-center justify-center ">
             <motion.div className="bg-grayGym bg-opacity-50 w-96 rounded-3xl" 
             initial={{scale: 0}} animate={{scale: window.innerWidth < 640 ? 0.9 : 1}}>
                 <div className='flex justify-end items-center'>
@@ -75,9 +80,18 @@ export function SignUp(){
                     type="password" placeholder="Contraseña" id='contraseña2'/>
                 </div>
 
+                {!createAcount ?
                 <div className='flex justify-center items-center'>
                     <button className='mt-8 mb-6 bg-white bg-opacity-70 w-28 h-8 rounded-lg transition-all duration-200 hover:bg-opacity-90 ' onClick={agregarUsuario}> Crear cuenta </button>
                 </div>
+                :
+                <div className='flex items-center justify-center h-8 mt-8 mb-6' >
+                    <motion.div initial={{rotate: 0}} animate={{rotate: 720}} transition={{duration: 1, ease: "linear", repeat: Infinity}} >
+                        <VscLoading style={{strokeWidth: '0.7px'}} className="text-2xl text-white"/>
+                    </motion.div>
+                </div>
+                }
+
             </motion.div>
 
             {validador === 1 ? <h1  className='text-red-500 text-opacity-90 text-center font-bold mt-3'  > Las contraseñas no coinciden </h1> : ""}
