@@ -11,7 +11,7 @@ import { IoMdClose } from 'react-icons/io'
 export function Navegacion(){
 
     const navigate = useNavigate()
-    const {setPage} = useContext(contextGlobal);
+    const {setPage, renderTrash} = useContext(contextGlobal);
 
     const url = window.location.href
     
@@ -21,38 +21,37 @@ export function Navegacion(){
         url.includes('records') && setPage('records')
     }, [url])
 
-    const [hide, setHide] = useState('290px')
+    const [hide, setHide] = useState(true)
     // const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     
     return (
         <div>
-            <motion.div className={` -translate-x-[${hide}] lg:translate-x-0 w-72 z-50 absolute left-0 h-screen bg-[#101010] overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-grayGym scrollbar-thumb-rounded-full transition-all duration-200`} >
-                <div className='relative'>
+            <div className={`${hide ? '-translate-x-[290px]' : '-translate-x-[0px]'} lg:translate-x-0 w-72 z-50 absolute left-0 h-screen bg-[#101010] overflow-auto scrollbar-none transition-all duration-200`} >
+                <div className='relative w-full h-full pt-14 flex flex-col gap-8'>
                     <CerrarSesion/>
 
-                    <div className='my-10'>
+                    <button className='absolute top-4 right-3 bg-grayGym p-2 rounded-full text-white lg:scale-0'
+                    onClick={()=>{setHide(true)}}>
+                        <IoMdClose className='text-2xl'/>
+                    </button>
+
+                    <div className=''>
                         <img src={logo} alt="Logo" className='rounded-full'></img>
                     </div>
-
-                    <Boton focus={'rutines'}> Rutinas </Boton>
-                    <Boton focus={'food'}> Alimentacion </Boton>
-                    <Boton focus={'records'}> Records </Boton>
+                    
+                    <div>
+                        <Boton focus={'rutines'}> Rutinas </Boton>
+                        <Boton focus={'food'}> Alimentacion </Boton>
+                        <Boton focus={'records'}> Records </Boton>
+                    </div>
                 </div>
-            </motion.div>
+            </div>
 
-            {hide === '290px' &&
-                <button className='z-20 absolute top-9 right-3 bg-grayGym p-3 rounded-full text-white lg:scale-0'
-                onClick={()=>{setHide('0px')}}>
-                    <FaBars/>
-                </button>
-            }
+            <button className={`${hide ? 'translate-y-0' : '-translate-y-20'} z-20 absolute top-9 ${renderTrash ? 'left-5': 'right-5'} bg-grayGym p-3 rounded-full text-white lg:scale-0 transition-all duration-200`}
+            onClick={()=>{setHide(false)}}>
+                <FaBars/>
+            </button>
 
-            {hide === '0px' &&
-                <button className='z-20 absolute top-9 right-3 bg-grayGym p-2 rounded-full text-white lg:scale-0'
-                onClick={()=>{setHide('290px')}}>
-                    <IoMdClose className='text-2xl'/>
-                </button>
-            }
         </div>
     )
 }

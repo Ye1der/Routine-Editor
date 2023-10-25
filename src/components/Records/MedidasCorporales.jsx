@@ -52,11 +52,11 @@ export function MedidasCorporales(){
 
   return (
     <motion.main initial={{scale: 0}} animate={{scale: 1}}>
-      <h1 className='ml-7 text-xl text-white font-semibold mb-3'> Medidas Corporales </h1>
+      <h1 className='ml-12 text-xl text-white font-semibold mb-3'> Medidas Corporales </h1>
 
       <section className=" flex items-center justify-center">
-        <div className="w-[240px] h-[162px] flex flex-col items-center justify-center bg-grayGym rounded-2xl mr-5 relative">
-
+        <div className="w-[280px] h-[180px] flex flex-col items-center justify-center bg-grayGym rounded-2xl mr-5 relative">
+          
           { swich == 'list' &&         
             <motion.section initial={{scale: 0}} animate={{scale: 1}} className="relative h-[90%] w-[95%] rounded-2xl overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-600 scrollbar-thumb-rounded-full">
 
@@ -70,8 +70,8 @@ export function MedidasCorporales(){
 
               {usuario != null && usuario.corporalMeasures.length > 0 && usuario.corporalMeasures.map((obj, index)=>{
                 return(
-                  <button key={index} onClick={()=>{setSwich('show'); setIndexMeasure(index)}} className="hover:text-yellow-500 text-center h-6 w-[50%] my-3 cursor-pointer text-xl text-white text-opacity-70 font-semibold transition-all duration-300">
-                    {obj.nombre}
+                  <button key={index} onClick={()=>{setSwich('show'); setIndexMeasure(index)}} className="hover:text-yellow-500 bg-black bg-opacity-30 text-center mx-2 h-10 rounded-xl w-[43%] my-2 cursor-pointer text-xl text-white text-opacity-70 font-semibold overflow-auto scrollbar-none transition-all duration-300">
+                    <h1>{obj.nombre}</h1>
                   </button>
                 )
               })}
@@ -110,7 +110,7 @@ export function MedidasCorporales(){
 
                 <RiCloseFill onClick={()=>{setSwich('show'); reset()}} className="absolute right-2 top-2 text-2xl text-white text-opacity-50 cursor-pointer hover:text-opacity-100 hover:rotate-90 transition-all duration-300"/>
 
-                <input className="text-white text-xl font-bold bg-transparent ml-8 mb-1 mt-5 outline-none cursor-pointer focus:placeholder:text-opacity-70 placeholder:font-bold placeholder:text-white placeholder:text-opacity-40 placeholder:text-xl" defaultValue={usuario.corporalMeasures[indexMeasure].nombre}
+                <input className="text-white text-xl font-bold bg-transparent ml-8 mb-1 mt-8 outline-none cursor-pointer focus:placeholder:text-opacity-70 placeholder:font-bold placeholder:text-white placeholder:text-opacity-40 placeholder:text-xl" defaultValue={usuario.corporalMeasures[indexMeasure].nombre}
                 type="text" placeholder="Nombre" {...register('nombre', {required: true})} autoComplete="off"/>
 
                 <div className=" mt-2 ml-8 ">
@@ -135,7 +135,7 @@ export function MedidasCorporales(){
 
                 <RiCloseFill onClick={()=>{setSwich('list'); reset()}} className="absolute right-2 top-2 text-2xl text-white text-opacity-50 cursor-pointer hover:text-opacity-100 hover:rotate-90 transition-all duration-300"/>
 
-                <input className="text-white text-xl font-bold bg-transparent ml-8 mb-1 mt-5 outline-none cursor-pointer focus:placeholder:text-opacity-70 placeholder:font-bold placeholder:text-white placeholder:text-opacity-40 placeholder:text-xl" type="text" placeholder="Nombre" {...register('nombre', {required: true})} autoComplete="off"/>
+                <input className="text-white text-xl font-bold bg-transparent ml-8 mb-1 mt-8 outline-none cursor-pointer focus:placeholder:text-opacity-70 placeholder:font-bold placeholder:text-white placeholder:text-opacity-40 placeholder:text-xl" type="text" placeholder="Nombre" {...register('nombre', {required: true})} autoComplete="off"/>
 
                 <div className=" mt-2 ml-8 ">
                   <label className="text-white text-xl font-bold text-opacity-70 cursor-pointer" htmlFor="actual"> Actual: </label>

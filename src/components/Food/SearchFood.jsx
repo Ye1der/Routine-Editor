@@ -11,7 +11,7 @@ export function SearchFood(){
   return(
 
       <div className='flex items-center'>
-        <button onClick={()=>{setFocus(true)}} onBlur={()=>{setFocus(false)}}  className={`text-xl mt-8 w-[140px] h-[50px] transition-all duration-300 ease-in-out cursor-pointer text-white hover:text-yellow-600 rounded-3xl flex items-center justify-center bg-grayGym ${focus && 'w-[350px]'}`}>
+        <button onClick={()=>{setFocus(true)}} onBlur={()=>{setFocus(false)}}  className={`scale-90 md:scale-100 text-xl mt-8 w-[140px] h-[50px] transition-all duration-300 ease-in-out cursor-pointer text-white hover:text-yellow-600 rounded-3xl flex items-center justify-center bg-grayGym ${focus && 'w-[250px] md:w-[350px]'}`}>
           
           {!focus && 
             <motion.span key="button" exit={{scale: 0, opacity: 0}} initial={{scale: 0}} animate={{scale: 1}} transition={{duration: 0.3, ease: easeInOut}}  className='flex items-center justify-center'>
@@ -31,7 +31,7 @@ export function SearchFood(){
 
         <AnimatePresence>
           {focus && 
-            <motion.button key="exitFocus" initial={{opacity: 0, x: -400}} animate={{opacity: 1, x: 0}} exit={{opacity: 0}} className='text-white absolute hover:text-yellow-600 text-xl h-[50px] w-[50px] rounded-full mt-8 flex items-center justify-center'>
+            <motion.button key="exitFocus" initial={{opacity: 0, x: -400}} animate={{opacity: 1, x: 0}} exit={{opacity: 0}} className='text-white absolute hover:text-yellow-600 ml-2 md:ml-0 text-xl h-[50px] w-[50px] rounded-full mt-8 flex items-center justify-center'>
               <BiArrowBack/>
             </motion.button>
           }

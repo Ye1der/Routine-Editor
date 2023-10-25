@@ -6,7 +6,7 @@ import { contextGlobal } from "../../Context/Context";
 export function ContainerFood(){
 
   return(
-    <div className="relative h-screen w-[77%] ml-[1%] flex flex-col items-center">
+    <div className="relative h-screen w-full lg:w-[77%] lg:ml-[290px] flex flex-col items-center">
 
       <SearchFood/>
 

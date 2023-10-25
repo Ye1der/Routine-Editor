@@ -21,21 +21,22 @@ export function RecordsContainer(){
   }
   
   return(
-    <main className="h-screen w-[77%] ml-[1%]">
+    <main className="h-screen w-full lg:w-[77%] lg:ml-[290px] flex flex-col items-center md:items-baseline overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-grayGym scrollbar-thumb-rounded-full">
       
-      <section className="flex">
-        <div className=" ml-14 mt-14 w-[400px]">
-          <Calcular1RM/>
-        </div>
-
-        <div className="ml-28 mt-14">
+      <div className="flex flex-col items-center md:flex-row">
+        
+        <div className="mt-24 md:mt-14">
           <MedidasCorporales/>
         </div>
-      </section>
 
-      <section className=" ml-14 mt-24">
-        <ExercisesObjetive/>
-      </section>
+        <div className="mt-16 md:ml-16 lg:ml-20 md:mt-14">
+          <ExercisesObjetive/>
+        </div>
+      </div>
+      
+      <div className="mr-[68px] mt-16 sm:ml-7 lg:md-14 md:mt-16 md:mr-0 lg:bg-red-200">
+        <Calcular1RM/>
+      </div>
 
     </main>
   )

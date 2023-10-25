@@ -36,7 +36,7 @@ export function ExercisesObjetive(){
   useEffect(()=>{
     updateUser(usuario).then(()=>{
       setLoading(false)
-      animateContainer.start({height: 192})
+      animateContainer.start({height: 176})
       setSwich('list')
       reset()
     })
@@ -63,13 +63,13 @@ export function ExercisesObjetive(){
   }
 
   return(
-    <motion.div initial={{scale: 0}} animate={{scale: 1}} className="w-[400px]">
+    <motion.div initial={{scale: 0}} animate={{scale: 1}} className="flex flex-col items-center">
 
-      <h1 className=" text-xl text-white font-semibold mb-4 "> Ejercicios | Marcas a alcanzar </h1>
+      <h1 className=" text-xl text-white font-semibold mb-4 mr-[70px]"> Marcas a alcanzar </h1>
 
-      <main className="h-[192px] flex items-center">
+      <main className=" flex items-center">
 
-        <motion.section initial={{height: 192}} animate={animateContainer} className={`w-[240px] bg-grayGym rounded-2xl p-5 relative overflow-auto scrollbar-none`}>
+        <motion.section initial={{height: 176}} animate={animateContainer} className={`w-[280px] bg-grayGym rounded-2xl py-5 px-7 relative overflow-auto scrollbar-none`}>
 
           {usuario === null && swich === 'list' &&
             <div className="h-full w-full grid place-content-center">
@@ -139,7 +139,7 @@ export function ExercisesObjetive(){
 
                 <RiCloseFill onClick={async ()=>{
                   setSwich('list');
-                  await animateContainer.start({height: 192})
+                  await animateContainer.start({height: 176})
                   reset()
                 }} className="absolute -right-3 -top-3 text-2xl text-white text-opacity-50 cursor-pointer hover:text-opacity-100 hover:rotate-90 transition-all duration-300"/>
 
@@ -155,7 +155,7 @@ export function ExercisesObjetive(){
           }
         </motion.section>
 
-        <section className="ml-5 mr-20 grid place-content-center"> 
+        <section className="ml-5 grid place-content-center"> 
           {swich == 'list' && 
             <motion.div initial={{scale: 0}} animate={{scale: 1}}>
               <button onClick={async()=>{
