@@ -34,7 +34,7 @@ export function RecordsContainer(){
         </div>
       </div>
       
-      <div className="mr-[68px] mt-16 sm:ml-7 lg:md-14 md:mt-16 md:mr-0 lg:bg-red-200">
+      <div className="mr-[68px] mt-16 sm:ml-7 lg:md-14 md:mt-16 md:mr-0">
         <Calcular1RM/>
       </div>
 
