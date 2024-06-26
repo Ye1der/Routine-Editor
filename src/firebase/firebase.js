@@ -1,9 +1,32 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import {getAuth, signOut, createUserWithEmailAndPassword, fetchSignInMethodsForEmail, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
-import {getStorage, ref, uploadBytes, getDownloadURL, getBytes} from "firebase/storage"
-import {getFirestore, collection, addDoc, getDocs, doc, getDoc, query, setDoc, where, deleteDoc } from "firebase/firestore"
-
+import {
+  getAuth,
+  signOut,
+  createUserWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  getBytes,
+} from "firebase/storage";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  getDoc,
+  query,
+  setDoc,
+  where,
+  deleteDoc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_APIKEY,
@@ -12,101 +35,98 @@ const firebaseConfig = {
   storageBucket: import.meta.env.VITE_STORAGEBUCKET,
   messagingSenderId: import.meta.env.VITE_MESSAGINSENDERID,
   appId: import.meta.env.VITE_APPID,
-  measurementId: import.meta.env.VITE_MEASUREMENTID
+  measurementId: import.meta.env.VITE_MEASUREMENTID,
 };
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const db = getFirestore(app)
-const storage = getStorage(app)
+export const db = getFirestore(app);
+const storage = getStorage(app);
 const analytics = getAnalytics(app);
 
-export async function existDbUser(texto){
-    const docRef = doc(db, "users", texto)
-    const res = await getDoc(docRef)
-    return res.exists()
+export async function existDbUser(texto) {
+  const docRef = doc(db, "users", texto);
+  const res = await getDoc(docRef);
+  return res.exists();
 }
 
-export async function addUser(user){
+export async function addUser(user) {
   const collectionRef = collection(db, "users");
-  const docRef = doc(collectionRef, user.email)
-  await setDoc(docRef, user)
+  const docRef = doc(collectionRef, user.email);
+  await setDoc(docRef, user);
 }
 
-export async function updateUser(user){
+export async function updateUser(user) {
   try {
-    const docRef = doc(db, "users", user.email)
-    await setDoc(docRef, user)
-    return true
+    const docRef = doc(db, "users", user.email);
+    await setDoc(docRef, user);
+    return true;
   } catch (error) {
-    console.log("error al actualizar el usuario", error);
-    return false
+    return false;
   }
 }
 
-export async function returnData(email){
+export async function returnData(email) {
+  const docRef = doc(db, "users", email);
+  const docSnap = await getDoc(docRef);
 
-  const docRef = doc(db, "users", email)
-  const docSnap = await getDoc(docRef)
-
-  if(docSnap.exists()){
-    return Promise.resolve(docSnap.data())
+  if (docSnap.exists()) {
+    return Promise.resolve(docSnap.data());
   } else {
-    return Promise.reject("no existe el usuario")
+    return Promise.reject("no existe el usuario");
   }
 }
 
-export async function createUser(email, contraseña){
+export async function createUser(email, contraseña) {
   try {
-    await createUserWithEmailAndPassword(auth, email, contraseña)
-    return true
+    await createUserWithEmailAndPassword(auth, email, contraseña);
+    return true;
   } catch (error) {
-    console.log("error al crear el usuario: ", error);
-    return false
+    return false;
   }
 }
 
-export async function userExist(email){
+export async function userExist(email) {
   try {
     const res = await fetchSignInMethodsForEmail(auth, email);
-    if (res.length > 0){
-    return true
-    } else {return false}
-
-  } catch (error) {
-    console.log("error al buscar el usuario", error)
-  }
-}
-
-export async function cerrarSesion(){
-  await signOut(auth)
-}
-
-export async function iniciarSesion(email, contraseña){
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, contraseña) 
-    const user = userCredential.user
-    if(user){
-      return true
+    if (res.length > 0) {
+      return true;
     } else {
-      return false
+      return false;
     }
+  } catch (error) {}
+}
 
+export async function cerrarSesion() {
+  await signOut(auth);
+}
+
+export async function iniciarSesion(email, contraseña) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      contraseña
+    );
+    const user = userCredential.user;
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (error) {
-    console.log("error al iniciar sesion: ", error)
-    return false 
+    return false;
   }
 }
 
-export function isAuth(){
+export function isAuth() {
   return new Promise((resolve, reject) => {
     onAuthStateChanged(auth, (user) => {
-      if(user){
-        resolve(true)
+      if (user) {
+        resolve(true);
       } else {
-        resolve(false)
+        resolve(false);
       }
-    })
-  })
+    });
+  });
 }
-
