@@ -127,7 +127,7 @@ export function SignUp() {
         {!createAccount ? (
           <div className="flex justify-center items-center">
             <button
-              className="mt-8 mb-6 bg-white bg-opacity-70 w-28 h-8 rounded-lg transition-all duration-200 hover:bg-opacity-90 "
+              className="mt-8 mb-6 bg-white font-semibold bg-opacity-70 px-4 py-[7px] rounded-2xl transition-color duration-200 hover:bg-opacity-90 "
               onClick={agregarUsuario}
             >
               {" "}

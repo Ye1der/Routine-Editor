@@ -1,7 +1,5 @@
-import { BsFillPersonFill } from "react-icons/bs";
 import { HiLockOpen } from "react-icons/hi";
-import { BsGoogle } from "react-icons/bs";
-import { FaFacebook } from "react-icons/fa";
+import { BsGoogle, BsFillPersonFill } from "react-icons/bs";
 import { useEffect, useState } from "react";
 
 import {
@@ -167,7 +165,7 @@ export function Login() {
             className="flex items-center justify-center"
           >
             <button
-              className="mt-8 bg-white bg-opacity-70 w-28 h-8 rounded-lg transition-all duration-200 hover:bg-opacity-90 "
+              className="mt-8 bg-white font-semibold bg-opacity-70 px-4 py-[7px] rounded-2xl transition-color duration-200 hover:bg-opacity-90 "
               onClick={verificadorLocal}
             >
               {" "}
@@ -189,16 +187,20 @@ export function Login() {
           </div>
         )}
 
-        <div className="flex gap-3 w-full items-center justify-center mt-8 mb-6">
+        <div className="flex flex-col gap-3 w-full items-center justify-center mt-8 mb-6">
+          <hr className="border border-white/5 w-full mb-2 -mt-1" />
+
           <div
-            className="cursor-pointer flex items-center justify-center bg-red-500 bg-opacity-75 p-2 rounded-full hover:bg-opacity-90 transition-all duration-200 w-10 h-10"
+            className="cursor-pointer w-[70%] flex gap-3 items-center justify-center bg-red-500 bg-opacity-75 py-2 px-4 rounded-2xl hover:bg-opacity-90 transition-all duration-200"
             onClick={loginGoogle}
           >
-            <BsGoogle className="" />
+            <BsGoogle />
+            <h1 className="font-semibold"> Iniciar sesión con Google </h1>
           </div>
 
-          <div className="w-10 h-10 cursor-pointer flex items-center justify-center bg-blue-500 bg-opacity-75 p-2 rounded-full hover:bg-opacity-100 transition-all duration-200">
-            <FaFacebook className="text-xl" />
+          <div className="w-[70%] cursor-pointer flex gap-3 items-center justify-center bg-[#a6a5ff] text-black bg-opacity-75 py-2 px-4 rounded-2xl hover:bg-opacity-90 transition-all duration-200">
+            <BsFillPersonFill size={20} />
+            <h1 className="font-semibold"> Continuar como invitado </h1>
           </div>
         </div>
       </motion.div>
