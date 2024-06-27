@@ -96,6 +96,17 @@ export function Login() {
     setLogin(false);
   }
 
+  async function continueGuest() {
+    localStorage.setItem("guest", "true");
+    if (!localStorage.getItem("data")) {
+      localStorage.setItem(
+        "data",
+        '{"rutines": [], "rutinesTrash": [], "objectiveExercises": [], "corporalMeasures": [], "name": "anonimo", "email": "anonimo"}'
+      );
+    }
+    navigate("/main/rutines");
+  }
+
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center overflow-auto scrollbar-none">
       <motion.div
@@ -198,7 +209,10 @@ export function Login() {
             <h1 className="font-semibold"> Iniciar sesión con Google </h1>
           </div>
 
-          <div className="w-[70%] cursor-pointer flex gap-3 items-center justify-center bg-[#a6a5ff] text-black bg-opacity-75 py-2 px-4 rounded-2xl hover:bg-opacity-90 transition-all duration-200">
+          <div
+            className="w-[70%] cursor-pointer flex gap-3 items-center justify-center bg-[#a6a5ff] text-black bg-opacity-75 py-2 px-4 rounded-2xl hover:bg-opacity-90 transition-all duration-200"
+            onClick={continueGuest}
+          >
             <BsFillPersonFill size={20} />
             <h1 className="font-semibold"> Continuar como invitado </h1>
           </div>

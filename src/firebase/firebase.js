@@ -57,6 +57,12 @@ export async function addUser(user) {
 }
 
 export async function updateUser(user) {
+  if (localStorage.getItem("guest") == "true") {
+    const data = JSON.stringify(user);
+    localStorage.setItem("data", data);
+    return true;
+  }
+
   try {
     const docRef = doc(db, "users", user.email);
     await setDoc(docRef, user);
@@ -67,6 +73,22 @@ export async function updateUser(user) {
 }
 
 export async function returnData(email) {
+  if (localStorage.getItem("guest") == "true") {
+    const data = localStorage.getItem("data");
+    if (data) {
+      return JSON.parse(data);
+    }
+
+    return {
+      rutines: [],
+      rutinesTrash: [],
+      objectiveExercises: [],
+      corporalMeasures: [],
+      name: "anonimo",
+      email: "anonimo",
+    };
+  }
+
   const docRef = doc(db, "users", email);
   const docSnap = await getDoc(docRef);
 
