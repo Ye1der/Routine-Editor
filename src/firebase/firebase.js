@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import {
   getAuth,
   signOut,
@@ -9,23 +8,11 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  getBytes,
-} from "firebase/storage";
-import {
   getFirestore,
   collection,
-  addDoc,
-  getDocs,
   doc,
   getDoc,
-  query,
   setDoc,
-  where,
-  deleteDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -41,13 +28,24 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-const storage = getStorage(app);
-const analytics = getAnalytics(app);
 
 export async function existDbUser(texto) {
   const docRef = doc(db, "users", texto);
   const res = await getDoc(docRef);
   return res.exists();
+}
+
+export async function getFood(food, page) {
+  const docRef = doc(db, "food", "Food");
+  const res = await getDoc(docRef);
+  const result = res.data();
+  const data = result.data;
+
+  const filterData = data.filter((element) =>
+    element.nombre.toLowerCase().includes(food.toLowerCase())
+  );
+
+  return filterData.slice((page + 1) * 10 - 10, (page + 1) * 10);
 }
 
 export async function addUser(user) {
